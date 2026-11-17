@@ -15,6 +15,18 @@ iswc-dialog {
   gap: t.esp(3);
 }
 
+/* Paisaje caribeño arriba del formulario (decorativo). En el celular también: es corto y da la bienvenida. */
+.banner {
+  height: 5.5rem;
+  margin: calc(-1 * #{t.esp(1)}) 0 0;
+  border-radius: t.radio(md);
+  background: var(--coco-arte-paisaje) no-repeat center / cover;
+
+  @media print {
+    display: none;
+  }
+}
+
 .lema {
   margin: 0;
   opacity: 0.75;

@@ -13,6 +13,7 @@
 
 .titulo {
   @include v.titulo;
+  @include v.sello(mojito);
 }
 
 .aviso {

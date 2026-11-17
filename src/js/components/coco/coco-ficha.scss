@@ -2,13 +2,17 @@
 @use "mixins" as m;
 @use "vista" as v;
 
-/* coco-ficha — formulario en diálogo: pestañas arriba, campos en rejilla, error abajo. */
+/* coco-ficha — formulario en drawer (derecha en tablet/escritorio, abajo en el celular): pestañas, campos, error. */
 :host {
   @include m.host-bloque;
 }
 
-iswc-dialog {
-  --width: min(56rem, 94vw);
+iswc-drawer {
+  --size: min(44rem, 92vw);
+
+  &[placement="bottom"] {
+    --size: 92dvh;
+  }
 }
 
 .ficha {

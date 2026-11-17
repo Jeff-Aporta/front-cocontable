@@ -56,6 +56,7 @@ class CocoAcceso extends Componente<CocoAccesoProps> {
     root.append(html`
       <iswc-dialog open label=${crear ? 'Crea tu cuenta' : 'Inicia sesión'} oniswc-after-hide=${() => this.emit('coco-cerrar', {})}>
         <form class="acceso" onsubmit=${(e: Event) => { e.preventDefault(); enviar(); }}>
+          <div class="banner" aria-hidden="true"></div>
           <p class="lema">${crear ? 'Tu contabilidad, fresca como agua de coco.' : 'Qué bueno verte de nuevo.'}</p>
           <iswc-input data-campo="iusuario" label="Usuario" autocomplete="username" required></iswc-input>
           ${crear ? html`<iswc-input data-campo="nombre" label="Tu nombre"></iswc-input><iswc-input data-campo="email" label="Correo" type="email" required></iswc-input>` : null}

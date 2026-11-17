@@ -5,6 +5,28 @@
 /* coco-informes — índice de informes a la izquierda; parámetros, totales y tabla a la derecha. */
 :host {
   @include m.host-bloque;
+  /* El índice depende del ancho de la VISTA (puede estar en un panel dividido), no del de la ventana. */
+  container: informes / inline-size;
+}
+
+/* En angosto el índice se vuelve un desplegable arriba del informe (no empuja el informe hacia abajo). */
+.elegir {
+  display: none;
+  margin-bottom: t.esp(3);
+}
+
+@container informes (max-width: 46rem) {
+  .marco {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .indice {
+    display: none;
+  }
+
+  .elegir {
+    display: block;
+  }
 }
 
 .barra {
@@ -13,6 +35,7 @@
 
 .titulo {
   @include v.titulo;
+  @include v.sello(coctel);
 }
 
 .aviso {
@@ -41,7 +64,9 @@
 
 .indice {
   @include v.superficie;
-  padding: t.esp(3);
+  /* alguien descansa en la hamaca al pie del índice */
+  @include v.adorno(hamaca, 13rem, 400 / 240, $abajo: t.esp(2), $derecha: t.esp(2));
+  padding: t.esp(3) t.esp(3) 9rem;
 
   .titulo {
     margin-bottom: t.esp(3);

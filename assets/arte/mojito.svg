@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160">
+  <defs>
+    <linearGradient id="mojito-liquido" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bff0e0"/>
+      <stop offset="1" stop-color="#7fd8e8"/>
+    </linearGradient>
+    <clipPath id="mojito-vaso"><path d="M30 44H90L82 140Q81 146 75 146H45Q39 146 38 140Z"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="152" rx="32" ry="5" fill="#0b2a4a" opacity=".22"/>
+  <path d="M70 120L88 8" stroke="#ff7a59" stroke-width="5" stroke-linecap="round"/>
+  <path d="M74 98L77 84M80 66L83 52" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+  <g clip-path="url(#mojito-vaso)">
+    <rect x="20" y="44" width="80" height="106" fill="#ffffff" opacity=".25"/>
+    <rect x="20" y="58" width="80" height="92" fill="url(#mojito-liquido)" opacity=".9"/>
+    <rect x="40" y="70" width="22" height="22" rx="5" fill="#ffffff" opacity=".55" transform="rotate(-14 51 81)"/>
+    <rect x="62" y="92" width="22" height="22" rx="5" fill="#ffffff" opacity=".5" transform="rotate(12 73 103)"/>
+    <rect x="42" y="106" width="20" height="20" rx="5" fill="#ffffff" opacity=".5" transform="rotate(8 52 116)"/>
+    <ellipse cx="50" cy="128" rx="6" ry="3.5" fill="#2e9e5b" transform="rotate(-30 50 128)"/>
+    <ellipse cx="68" cy="76" rx="7" ry="3.5" fill="#2e9e5b" transform="rotate(25 68 76)"/>
+  </g>
+  <path d="M30 44H90L82 140Q81 146 75 146H45Q39 146 38 140Z" fill="none" stroke="#ffffff" stroke-width="3" opacity=".8" stroke-linejoin="round"/>
+  <path d="M38 54L43 130" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity=".5"/>
+  <ellipse cx="60" cy="44" rx="30" ry="4" fill="#ffffff" opacity=".35"/>
+  <path d="M44 44Q36 28 48 22Q56 34 52 44Z" fill="#2e9e5b"/>
+  <path d="M56 44Q54 24 68 16Q72 32 62 44Z" fill="#5cc27a"/>
+  <path d="M48 44Q62 30 76 36Q70 46 60 46Z" fill="#1f7a45"/>
+  <path d="M48 34Q52 36 52 42M66 24Q66 32 62 40" stroke="#bff0c8" stroke-width="1.2" fill="none"/>
+  <path d="M78 34A16 16 0 0 1 108 52L78 52Z" fill="#5cc27a"/>
+  <path d="M82 38A12 12 0 0 1 103 50L82 50Z" fill="#d6f0a0"/>
+  <path d="M92 40L90 50M98 44L88 50" stroke="#5cc27a" stroke-width="1.2"/>
+</svg>

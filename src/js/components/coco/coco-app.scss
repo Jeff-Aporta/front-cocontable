@@ -1,5 +1,6 @@
 @use "tokens" as t;
 @use "mixins" as m;
+@use "vista" as v;
 
 /* coco-app — shell SIN barra superior: panel izquierdo (marca, módulos, usuario) y área de trabajo divisible.
    Ambiente caribe: el panel lleva un degradado suave del color de marca (mar) hacia la superficie (arena). */
@@ -166,6 +167,11 @@
   }
 }
 
+/* Una palma asoma detrás de las acciones del menú abierto (decoración, sin clics). */
+.lateral:not([data-colapsado]) .acciones {
+  @include v.adorno(palma, 4.5rem, 200 / 260, $abajo: 100%, $derecha: t.esp(2), $opacidad: 0.55);
+}
+
 .acciones {
   padding: t.esp(1) t.esp(2);
   border-top: 1px solid var(--iswc-border-soft);
@@ -174,8 +180,10 @@
 .pie {
   display: grid;
   gap: t.esp(2);
-  padding: t.esp(3);
+  padding: t.esp(3) t.esp(3) t.esp(4);
   border-top: 1px solid var(--iswc-border-soft);
+  /* olas suaves al pie del panel */
+  background: var(--coco-arte-olas) repeat-x left bottom / 18rem 0.6rem;
 }
 
 .usuario {
@@ -248,6 +256,15 @@
   box-sizing: border-box;
   overflow: auto;
   padding: t.esp(5);
+  /* Arte caribeño: la isla abajo a la derecha, al FINAL del contenido (attachment local + margen reservado abajo):
+     nunca queda detrás de un total o un campo. Solo tablet y escritorio. */
+  padding-bottom: calc(#{t.esp(5)} + clamp(6rem, 11vw, 11rem));
+  background: var(--coco-arte-isla) no-repeat right t.esp(4) bottom t.esp(3) / clamp(8rem, 15vw, 15rem) auto local;
+
+  @media (max-width: 720px), print {
+    padding-bottom: t.esp(5);
+    background: none;
+  }
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--iswc-brand) 35%, transparent) transparent;
 

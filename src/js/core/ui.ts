@@ -9,6 +9,9 @@ import type { Fila, Opcion } from '../consts/schemas/api.schemas.js';
 const PESOS = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
 const NUMERO = new Intl.NumberFormat('es-CO', { maximumFractionDigits: 2 });
 
+/** Pantalla angosta (celular, ≤ 720 px): menú en íconos, edición en drawer inferior, sin arte decorativo. */
+export const angosto = (): boolean => typeof matchMedia === 'function' && matchMedia('(max-width: 720px)').matches;
+
 /** Número desde un valor del API (los decimales pueden llegar como texto). */
 export const num = (v: unknown): number => (v == null || v === '' ? 0 : Number(v) || 0);
 

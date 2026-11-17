@@ -1,0 +1,1 @@
+var a=["isla","hamaca","paisaje","agua-de-coco","mojito","coctel","gafas","sombrilla","palma","olas","coco"];function c(o=document.documentElement){for(let e of a){let t=new URL(`./assets/arte/${e}.svg`,document.baseURI).href;o.style.setProperty(`--coco-arte-${e}`,`url("${t}")`)}}export{a as ARTE,c as declararArte};

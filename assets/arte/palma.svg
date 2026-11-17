@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260">
+  <defs>
+    <path id="palma-fronda" d="M0 0C12-17 40-23 64-5C42-9 20-2 0 0Z"/>
+    <g id="palma-lado">
+      <use href="#palma-fronda" fill="#1f7a45" transform="rotate(-82)"/>
+      <use href="#palma-fronda" fill="#2e9e5b" transform="rotate(-46)"/>
+      <use href="#palma-fronda" fill="#5cc27a" transform="rotate(-10)"/>
+      <use href="#palma-fronda" fill="#2e9e5b" transform="rotate(26)"/>
+    </g>
+  </defs>
+  <ellipse cx="44" cy="254" rx="46" ry="6" fill="#0b2a4a" opacity=".2"/>
+  <path d="M0 254Q20 242 50 244Q82 244 96 254Z" fill="#f4d9a0"/>
+  <path d="M16 256Q40 160 112 82L126 88Q74 170 52 256Z" fill="#a8692f"/>
+  <path d="M16 256Q40 160 112 82L118 85Q56 170 34 256Z" fill="#7a4a24" opacity=".5"/>
+  <path d="M22 232L46 236M30 206L54 212M44 180L66 188M62 156L82 166M84 130L100 142" stroke="#7a4a24" stroke-width="2.5" opacity=".7" stroke-linecap="round"/>
+  <g transform="translate(120 80) scale(1.15)">
+    <use href="#palma-lado"/>
+    <use href="#palma-lado" transform="scale(-1 1) rotate(8)"/>
+    <circle cx="-5" cy="6" r="6.5" fill="#7a4a24"/>
+    <circle cx="6" cy="8" r="6.5" fill="#a8692f"/>
+    <circle cx="0" cy="14" r="6.5" fill="#7a4a24"/>
+    <circle cx="-7" cy="4" r="2" fill="#a8692f"/>
+  </g>
+  <circle cx="86" cy="248" r="6" fill="#7a4a24"/><circle cx="84.5" cy="246.5" r="1.8" fill="#a8692f"/>
+</svg>

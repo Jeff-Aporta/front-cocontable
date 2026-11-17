@@ -19,8 +19,8 @@ export const KIT_TAGS = [
   'iswc-callout',
   'iswc-card',
   'iswc-code',
-  'iswc-data-grid',
   'iswc-dialog',
+  'iswc-drawer',
   'iswc-empty-state',
   'iswc-icon',
   'iswc-input',
@@ -42,6 +42,15 @@ export const KIT_TAGS = [
 export const SHELL_CRITICO = ['iswc-icon', 'iswc-split-panel', 'iswc-toast'] as const satisfies readonly (typeof KIT_TAGS)[number][];
 
 export const PREFIJO = 'coco';
+
+/**
+ * Copias LOCALES de componentes del kit (`src/kit-local/`, ver su README): mientras estén aquí la app usa ESTAS
+ * versiones y no las del CDN. El registrador carga el módulo local cuando aparece el tag, así que la del kit nunca
+ * llega a ejecutarse. Cuando la corrección esté firme se sube al iswc-base, se borra la copia y esta entrada.
+ */
+export const OVERRIDES_KIT: Record<string, string> = {
+  'iswc-ag-grid': 'kit-local/data/ag-grid.js',
+};
 
 export const APP_TAGS = ['coco-app', 'coco-acceso', 'coco-tabla', 'coco-ficha', 'coco-catalogo'] as const;
 
@@ -73,7 +82,7 @@ export function mapaRutas(): Record<string, string> {
     if (!tag.startsWith(`${PREFIJO}-`)) throw new Error(`kit-tags: ${tag} no lleva el prefijo ${PREFIJO}-`);
     mapa[tag] = `${rutaComponente(tag)}${tag}.js`;
   }
-  return mapa;
+  return { ...mapa, ...OVERRIDES_KIT };
 }
 
 /** Tags que el shell pide al arrancar (transversales + todas las vistas). */

@@ -13,14 +13,14 @@ import { Componente, html } from '../../base/componente.js';
 import type { Campo, Opcion } from '../../consts/schemas/api.schemas.js';
 import type { CocoFichaProps } from '../../consts/schemas/componentes.schemas.js';
 import { sesion } from '../../core/api.js';
-import { listaCacheada, opcionesDe, valorDe } from '../../core/ui.js';
+import { angosto, listaCacheada, opcionesDe, valorDe } from '../../core/ui.js';
 
 const TIPO_INPUT: Record<string, string> = { texto: 'text', numero: 'number', dinero: 'number', fecha: 'date', correo: 'email' };
 
 class CocoFicha extends Componente<CocoFichaProps> {
   static tag = 'coco-ficha';
   static css = css;
-  static deps = ['iswc-dialog', 'iswc-tab-group', 'iswc-input', 'iswc-select', 'iswc-switch', 'iswc-textarea', 'iswc-button', 'iswc-callout'];
+  static deps = ['iswc-drawer', 'iswc-tab-group', 'iswc-input', 'iswc-select', 'iswc-switch', 'iswc-textarea', 'iswc-button', 'iswc-callout'];
 
   protected override inicial(): CocoFichaProps {
     return { titulo: '', campos: [], valores: {}, alta: true, abierta: false, guardando: false, error: '', eliminable: false };
@@ -101,7 +101,7 @@ class CocoFicha extends Componente<CocoFichaProps> {
         </iswc-tab-group>`
       : cuerpo(pestanas[0] ?? '');
     root.append(html`
-      <iswc-dialog open label=${props.titulo} part="dialogo" oniswc-after-hide=${() => this.emit('coco-cerrar', {})}>
+      <iswc-drawer open label=${props.titulo} placement=${angosto() ? 'bottom' : 'end'} part="dialogo" oniswc-after-hide=${() => this.emit('coco-cerrar', {})}>
         <form class="ficha" onsubmit=${(e: Event) => e.preventDefault()}>
           ${contenido}
           <iswc-callout data-error color="danger" ?hidden=${!props.error}>${props.error}</iswc-callout>
@@ -109,7 +109,7 @@ class CocoFicha extends Componente<CocoFichaProps> {
         ${props.eliminable ? html`<iswc-button slot="footer" variant="text" color="danger" onclick=${() => this.emit('coco-eliminar', {})}>Eliminar</iswc-button>` : null}
         <iswc-button slot="footer" variant="outlined" onclick=${() => this.emit('coco-cerrar', {})}>Cancelar</iswc-button>
         <iswc-button slot="footer" data-guardar ?loading=${props.guardando} onclick=${() => this.#guardar(props)}>Guardar</iswc-button>
-      </iswc-dialog>
+      </iswc-drawer>
     `);
   }
 }

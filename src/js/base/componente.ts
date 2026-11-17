@@ -158,13 +158,34 @@ export class Componente<P extends object = Record<string, never>> extends IswcEl
     this.#props = { ...this.props, ...(tardias ?? {}) };
   }
 
+  #pintando = false;
+  #otraVez = false;
+
+  /**
+   * Repinta sin reentrar: si `pintar()` dispara (directa o indirectamente) otro cambio de props — p. ej. un `async`
+   * sin `await` que llega a `this.props = {}` —, el segundo repintado espera a que termine el actual. Sin esta guarda
+   * el interno limpiaba y pintaba, y el externo seguía añadiendo: la vista salía duplicada.
+   */
   #repintar(): void {
     const root = this.shadow;
     if (!root) return;
-    for (const n of [...root.childNodes]) {
-      if (!(n instanceof HTMLStyleElement) && !(n instanceof HTMLLinkElement)) n.remove();
+    if (this.#pintando) {
+      this.#otraVez = true;
+      return;
     }
-    this.pintar(root, this.props);
+    this.#pintando = true;
+    try {
+      // tope de vueltas: un pintar() que SIEMPRE cambia props no debe colgar la página
+      for (let vuelta = 0; vuelta === 0 || (this.#otraVez && vuelta < 5); vuelta++) {
+        this.#otraVez = false;
+        for (const n of [...root.childNodes]) {
+          if (!(n instanceof HTMLStyleElement) && !(n instanceof HTMLLinkElement)) n.remove();
+        }
+        this.pintar(root, this.props);
+      }
+    } finally {
+      this.#pintando = false;
+    }
   }
 }
 

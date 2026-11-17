@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 180">
+  <defs>
+    <linearGradient id="paisaje-cielo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fd8e8"/>
+      <stop offset=".55" stop-color="#ffd9a8"/>
+      <stop offset="1" stop-color="#ffb347"/>
+    </linearGradient>
+    <linearGradient id="paisaje-mar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#00a3c4"/>
+      <stop offset="1" stop-color="#1e90ff"/>
+    </linearGradient>
+    <linearGradient id="paisaje-fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".62" stop-color="#fff"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="paisaje-mascara"><rect width="1200" height="180" fill="url(#paisaje-fade)"/></mask>
+    <radialGradient id="paisaje-halo">
+      <stop offset="0" stop-color="#ffb347" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
+    </radialGradient>
+    <path id="paisaje-fronda" d="M0 0C12-17 40-23 64-5C42-9 20-2 0 0Z"/>
+    <g id="paisaje-lado">
+      <use href="#paisaje-fronda" fill="#14573a" transform="rotate(-82)"/>
+      <use href="#paisaje-fronda" fill="#1f7a45" transform="rotate(-46)"/>
+      <use href="#paisaje-fronda" fill="#2e9e5b" transform="rotate(-10)"/>
+      <use href="#paisaje-fronda" fill="#1f7a45" transform="rotate(26)"/>
+    </g>
+    <g id="paisaje-corona">
+      <use href="#paisaje-lado"/>
+      <use href="#paisaje-lado" transform="scale(-1 1) rotate(8)"/>
+      <circle cx="-4" cy="5" r="5" fill="#7a4a24"/>
+      <circle cx="5" cy="6" r="5" fill="#a8692f"/>
+    </g>
+  </defs>
+  <g mask="url(#paisaje-mascara)">
+    <rect width="1200" height="112" fill="url(#paisaje-cielo)"/>
+    <circle cx="820" cy="100" r="70" fill="url(#paisaje-halo)"/>
+    <circle cx="820" cy="100" r="30" fill="#ff7a59"/>
+    <g fill="#ffffff" opacity=".6">
+      <ellipse cx="260" cy="40" rx="48" ry="10"/><ellipse cx="290" cy="32" rx="30" ry="9"/>
+      <ellipse cx="620" cy="28" rx="55" ry="9"/><ellipse cx="1000" cy="46" rx="44" ry="9"/>
+    </g>
+    <path d="M150 112Q250 70 360 100Q420 84 500 112Z" fill="#1f7a45" opacity=".5"/>
+    <path d="M880 112Q960 66 1040 92Q1100 78 1160 112Z" fill="#1f7a45" opacity=".5"/>
+    <path d="M300 112Q380 84 470 112Z" fill="#2e9e5b" opacity=".6"/>
+    <rect y="108" width="1200" height="72" fill="url(#paisaje-mar)"/>
+    <g fill="#ffb347" opacity=".75">
+      <rect x="790" y="114" width="60" height="3" rx="1.5"/>
+      <rect x="800" y="122" width="40" height="3" rx="1.5"/>
+      <rect x="808" y="130" width="24" height="3" rx="1.5"/>
+    </g>
+    <g fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity=".6">
+      <path d="M120 130q8-5 16 0t16 0"/><path d="M330 144q8-5 16 0t16 0t16 0"/>
+      <path d="M660 126q8-5 16 0t16 0"/><path d="M980 140q8-5 16 0t16 0t16 0"/>
+      <path d="M470 150q8-5 16 0t16 0"/>
+    </g>
+    <path d="M520 138L600 138L590 148L530 148Z" fill="#7a4a24"/>
+    <path d="M558 132L558 86L596 132Z" fill="#ffffff"/>
+    <path d="M552 132L552 98L526 132Z" fill="#ffb347"/>
+    <path d="M558 86L558 80L568 83L558 86Z" fill="#ff7a59"/>
+    <path d="M558 80L558 134" stroke="#7a4a24" stroke-width="2"/>
+    <ellipse cx="560" cy="152" rx="50" ry="3" fill="#0b2a4a" opacity=".2"/>
+    <g fill="none" stroke="#0f3a5a" stroke-width="2.5" stroke-linecap="round" opacity=".7">
+      <path d="M400 40q8-9 16 0q8-9 16 0"/>
+      <path d="M440 58q6-7 12 0q6-7 12 0"/>
+      <path d="M700 36q7-8 14 0q7-8 14 0"/>
+    </g>
+    <g fill="none" stroke="#7a4a24" stroke-linecap="round">
+      <path d="M26 190Q34 120 78 62" stroke-width="12"/>
+      <path d="M1176 190Q1166 120 1124 66" stroke-width="12"/>
+      <path d="M96 190Q92 148 126 112" stroke-width="8"/>
+    </g>
+    <use href="#paisaje-corona" transform="translate(78 62) scale(1.35)"/>
+    <use href="#paisaje-corona" transform="translate(1124 66) scale(1.35)"/>
+    <use href="#paisaje-corona" transform="translate(126 112) scale(.8)"/>
+  </g>
+</svg>

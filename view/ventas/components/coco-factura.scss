@@ -5,6 +5,8 @@
 /* coco-factura — encabezado en rejilla, buscador, renglones como tabla editable y pie con totales grandes. */
 :host {
   @include m.host-bloque;
+  /* el pie se parte según el ancho de la VISTA (menú abierto, paneles divididos), no de la ventana */
+  container: factura / inline-size;
 }
 
 .barra {
@@ -13,6 +15,7 @@
 
 .titulo {
   @include v.titulo;
+  @include v.sello(agua-de-coco);
 }
 
 .estado {
@@ -153,18 +156,21 @@
   @include v.superficie;
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: t.esp(1) t.esp(4);
+  /* sin separación entre columnas: la raya del total cruza entera (el aire lo da el padding del dd) */
+  gap: t.esp(1) 0;
   align-items: center;
   margin: 0;
   padding: t.esp(4);
 
   dd {
     margin: 0;
+    padding-left: t.esp(4);
     text-align: right;
     font-variant-numeric: tabular-nums;
   }
 
   .grande {
+    white-space: nowrap;
     padding-top: t.esp(2);
     border-top: 1px solid var(--iswc-border-soft);
     font-size: 1.6rem;
@@ -213,8 +219,13 @@
   }
 }
 
-@media (max-width: 800px) {
+@container factura (max-width: 46rem) {
   .pie {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* atajos de teclado: en pantallas táctiles no aplican y apretaban el título */
+  .atajos {
+    display: none;
   }
 }

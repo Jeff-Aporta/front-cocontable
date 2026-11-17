@@ -9,6 +9,32 @@
 
 .barra {
   @include v.barra;
+  /* Banner caribeño: el paisaje entra desde la derecha y se funde hacia el título (que queda sobre el fondo
+     liso, legible en claro y oscuro). Solo tablet y escritorio. */
+  position: relative;
+  isolation: isolate;
+  min-height: 6.5rem;
+  align-items: flex-end;
+  padding-bottom: t.esp(2);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 0 28%;
+    border-radius: t.radio(lg);
+    background: var(--coco-arte-paisaje) no-repeat right center / cover;
+    mask-image: linear-gradient(to right, transparent, #000 45%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @media (max-width: 720px), print {
+    min-height: 0;
+
+    &::before {
+      display: none;
+    }
+  }
 }
 
 .titulo {
@@ -24,6 +50,29 @@
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
   gap: t.esp(3);
   margin-bottom: t.esp(5);
+}
+
+/* Pegatinas festivas en algunas tarjetas: abajo a la derecha, donde la tarjeta no tiene texto. */
+$pegatinas: (facturas: coctel 120 / 160, productos: coco 1, clientes: gafas 140 / 60, egresos: mojito 120 / 160, caja: agua-de-coco 120 / 140, cxc: sombrilla 1);
+
+@each $modulo, $arte in $pegatinas {
+  .tarjeta[data-modulo="#{$modulo}"] {
+    @include v.adorno(nth($arte, 1), if(nth($arte, 2) == 140 / 60, 3.6rem, 2.6rem), nth($arte, 2), $abajo: t.esp(3), $derecha: t.esp(3));
+
+    &::after {
+      transition: transform 0.25s ease;
+    }
+
+    &:hover::after {
+      transform: rotate(-8deg) scale(1.08);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &:hover::after {
+        transform: none;
+      }
+    }
+  }
 }
 
 .tarjeta {

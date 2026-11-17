@@ -12,7 +12,7 @@ Recibe columnas (texto, dinero, número, fecha, sí/no, estado) y filas, las for
 ```
 <coco-tabla>
   #shadow-root
-    <iswc-data-grid part="tabla">     (o <iswc-empty-state part="vacio"> sin filas)
+    <iswc-ag-grid part="tabla">       (o <iswc-empty-state part="vacio"> sin filas)
 ```
 
 ## Atributos observados

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <clipPath id="sombrilla-copa"><path d="M10 72Q80 -16 150 72Q137 62 124 72Q111 62 98 72Q85 62 72 72Q59 62 46 72Q33 62 10 72Z"/></clipPath>
+  </defs>
+  <ellipse cx="80" cy="148" rx="66" ry="10" fill="#0b2a4a" opacity=".2"/>
+  <path d="M14 148Q80 124 146 148Q80 160 14 148Z" fill="#f4d9a0"/>
+  <path d="M30 148Q80 138 130 148Q80 156 30 148Z" fill="#e8c27a" opacity=".7"/>
+  <path d="M80 30L86 144" stroke="#7a4a24" stroke-width="5" stroke-linecap="round"/>
+  <g clip-path="url(#sombrilla-copa)">
+    <rect x="0" y="0" width="160" height="80" fill="#ffffff"/>
+    <path d="M80 6L10 80L33 80Z" fill="#ff7a59"/>
+    <path d="M80 6L57 80L103 80Z" fill="#ff7a59"/>
+    <path d="M80 6L127 80L150 80Z" fill="#ff7a59"/>
+    <path d="M30 40Q50 18 78 12" fill="none" stroke="#ffffff" stroke-width="5" opacity=".35" stroke-linecap="round"/>
+  </g>
+  <circle cx="80" cy="14" r="4" fill="#7a4a24"/>
+  <path d="M96 140L142 134L152 146L104 152Z" fill="#00a3c4"/>
+  <path d="M110 138L120 148M122 137L132 147" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="44" cy="146" r="5" fill="#7a4a24"/><circle cx="42.5" cy="144.5" r="1.6" fill="#a8692f"/>
+</svg>

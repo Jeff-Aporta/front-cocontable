@@ -1,0 +1,288 @@
+// @contexto INDICE.md · src/components/data/README.md
+/**
+ * types.ts — Zod schemas para los tipos extraídos de este módulo.
+ *
+ * Generado por `scripts/migrate-zod.py`. Refinar manualmente las
+ * entradas marcadas con TODO cuando se quiera validación runtime.
+ */
+import { z } from "zod";
+
+const TextFilterOpSchema = z.union([z.literal('contains'), z.literal('notContains'), z.literal('equals'), z.literal('notEqual'), z.literal('startsWith'), z.literal('endsWith'), z.literal('blank'), z.literal('notBlank')]);
+export type TextFilterOp = z.infer<typeof TextFilterOpSchema>;
+
+const NumberFilterOpSchema = z.union([z.literal('eq'), z.literal('neq'), z.literal('gt'), z.literal('gte'), z.literal('lt'), z.literal('lte'), z.literal('inRange'), z.literal('blank'), z.literal('notBlank')]);
+
+const DateFilterOpSchema = z.union([z.literal('eq'), z.literal('before'), z.literal('after'), z.literal('inRange')]);
+
+const TextFilterSchema = z.object({
+  type: z.literal('text'),
+  op: TextFilterOpSchema,
+  value: z.string(),
+});
+export type TextFilter = z.infer<typeof TextFilterSchema>;
+
+const NumberFilterSchema = z.object({
+  type: z.literal('number'),
+  op: NumberFilterOpSchema,
+  value: z.union([z.number(), z.null()]),
+  to: z.union([z.number(), z.null()]).optional(),
+});
+export type NumberFilter = z.infer<typeof NumberFilterSchema>;
+
+const DateFilterSchema = z.object({
+  type: z.literal('date'),
+  op: DateFilterOpSchema,
+  value: z.string(),
+  to: z.string().optional(),
+});
+export type DateFilter = z.infer<typeof DateFilterSchema>;
+
+const SetFilterSchema = z.object({
+  type: z.literal('set'),
+  values: z.array(z.string()),
+});
+export type SetFilter = z.infer<typeof SetFilterSchema>;
+
+/** Condicion simple: los filtros combinados (A y/o B) anidan estas. */
+const FilterCondSchema = z.union([TextFilterSchema, NumberFilterSchema, DateFilterSchema, SetFilterSchema]);
+
+const CombinedFilterSchema = z.object({
+  type: z.literal('combined'),
+  op: z.union([z.literal('AND'), z.literal('OR')]),
+  conditions: z.array(FilterCondSchema),
+});
+
+const ColumnFilterSchema = z.union([FilterCondSchema, CombinedFilterSchema]);
+export type ColumnFilter = z.infer<typeof ColumnFilterSchema>;
+
+const FilterModelSchema = z.record(z.string(), ColumnFilterSchema);
+export type FilterModel = z.infer<typeof FilterModelSchema>;
+
+/** Tipos de columna del motor: los que trae de serie `ColumnType`. */
+const ColumnTypeNameSchema = z.enum(['text', 'number', 'date', 'boolean']);
+
+const AggFuncNameSchema = z.unknown() /* TODO: cannot convert */;
+
+const SortDirNameSchema = z.unknown() /* TODO: cannot convert */;
+export type SortDirName = z.infer<typeof SortDirNameSchema>;
+
+const PinSideNameSchema = z.unknown() /* TODO: cannot convert */;
+export type PinSideName = z.infer<typeof PinSideNameSchema>;
+
+/** Alineación de la celda y de la cabecera. */
+const AlignNameSchema = z.enum(['left', 'center', 'right']);
+export type AlignName = z.infer<typeof AlignNameSchema>;
+
+const DensityNameSchema = z.unknown() /* TODO: cannot convert */;
+export type DensityName = z.infer<typeof DensityNameSchema>;
+
+const SelectionModeNameSchema = z.unknown() /* TODO: cannot convert */;
+export type SelectionModeName = z.infer<typeof SelectionModeNameSchema>;
+
+/** Tipos de filtro que el motor sabe aplicar. */
+const FilterTypeNameSchema = z.enum(['text', 'number', 'date', 'set']);
+
+const RowDataSchema = z.record(z.string(), z.unknown());
+export type RowData = z.infer<typeof RowDataSchema>;
+
+const RowNodeSchema = z.object({
+  id: z.string(),
+  index: z.number(),
+  data: RowDataSchema,
+});
+export type RowNode = z.infer<typeof RowNodeSchema>;
+
+const GroupRowSchema = z.object({
+  kind: z.literal('group'),
+  id: z.string(),
+  colId: z.string(),
+  field: z.string(),
+  value: z.unknown(),
+  label: z.string(),
+  level: z.number(),
+  count: z.number(),
+  expanded: z.boolean(),
+  agg: z.record(z.string(), z.unknown()),
+  leafIds: z.array(z.string()),
+});
+
+const LeafRowSchema = z.object({
+  kind: z.literal('leaf'),
+  level: z.number(),
+  node: RowNodeSchema,
+});
+
+const DisplayRowSchema = z.union([GroupRowSchema, LeafRowSchema]);
+export type DisplayRow = z.infer<typeof DisplayRowSchema>;
+
+const ColumnDefSchema = z.object({
+  field: z.string(),
+  colId: z.string().optional(),
+  headerName: z.string().optional(),
+  header: z.string().optional(),
+  caption: z.string().optional(),
+  type: z.union([ColumnTypeNameSchema, z.literal('currency'), z.literal('dateTime')]).optional(),
+  width: z.number().optional(),
+  minWidth: z.number().optional(),
+  maxWidth: z.number().optional(),
+  flex: z.number().optional(),
+  sortable: z.boolean().optional(),
+  resizable: z.boolean().optional(),
+  filter: z.union([z.boolean(), FilterTypeNameSchema]).optional(),
+  pinned: z.union([PinSideNameSchema, z.null()]).optional(),
+  hide: z.boolean().optional(),
+  align: AlignNameSchema.optional(),
+  rowGroup: z.boolean().optional(),
+  enableRowGroup: z.boolean().optional(),
+  aggFunc: AggFuncNameSchema.optional(),
+  checkboxSelection: z.boolean().optional(),
+  valueGetter: z.function({ input: [z.unknown() /* TODO: ref RowData */], output: z.unknown() }).optional(),
+  valueFormatter: z.function({ input: [z.unknown(), z.unknown() /* TODO: ref RowData */], output: z.string() }).optional(),
+  comparator: z.function({ input: [z.unknown(), z.unknown(), z.unknown() /* TODO: ref RowData */, z.unknown() /* TODO: ref RowData */], output: z.number() }).optional(),
+  cellClass: z.string().optional(),
+  headerClass: z.string().optional(),
+  editable: z.boolean().optional(),
+  format: z.union([z.string(), z.function({ input: [z.unknown()], output: z.string() })]).optional(),
+});
+export type ColumnDef = z.infer<typeof ColumnDefSchema>;
+
+const ColumnStateSchema = z.object({
+  colId: z.string(),
+  field: z.string(),
+  headerName: z.string(),
+  type: z.union([ColumnTypeNameSchema, z.literal('currency'), z.literal('dateTime')]),
+  width: z.number(),
+  minWidth: z.number(),
+  maxWidth: z.number(),
+  flex: z.number().optional(),
+  sortable: z.boolean(),
+  resizable: z.boolean(),
+  filterType: z.union([FilterTypeNameSchema, z.null()]),
+  pinned: z.union([PinSideNameSchema, z.null()]),
+  hide: z.boolean(),
+  align: AlignNameSchema,
+  enableRowGroup: z.boolean(),
+  aggFunc: z.union([AggFuncNameSchema, z.null()]),
+  checkboxSelection: z.boolean(),
+  def: ColumnDefSchema,
+});
+export type ColumnState = z.infer<typeof ColumnStateSchema>;
+
+const SortModelItemSchema = z.object({
+  colId: z.string(),
+  dir: SortDirNameSchema,
+});
+
+const SortModelSchema = z.array(SortModelItemSchema);
+export type SortModel = z.infer<typeof SortModelSchema>;
+
+const GridOptionsSchema = z.object({
+  columns: z.array(ColumnDefSchema),
+  rows: z.array(RowDataSchema),
+  getRowId: z.function({ input: [z.unknown() /* TODO: ref RowData */, z.number()], output: z.string() }).optional(),
+  rowHeight: z.number().optional(),
+  headerHeight: z.number().optional(),
+  selectionMode: SelectionModeNameSchema.optional(),
+  pagination: z.boolean().optional(),
+  pageSize: z.number().optional(),
+  quickFilter: z.string().optional(),
+  density: DensityNameSchema.optional(),
+  defaultColWidth: z.number().optional(),
+  rowGroupCols: z.array(z.string()).optional(),
+  groupDefaultExpanded: z.number().optional(),
+});
+export type GridOptions = z.infer<typeof GridOptionsSchema>;
+
+const GridStateSchema = z.object({
+  columns: z.array(ColumnStateSchema),
+  sortModel: SortModelSchema,
+  filterModel: FilterModelSchema,
+  quickFilter: z.string(),
+  selection: z.set(z.string()),
+  density: DensityNameSchema,
+  pagination: z.boolean(),
+  page: z.number(),
+  pageSize: z.number(),
+  displayedRows: z.array(RowNodeSchema),
+  pageRows: z.array(RowNodeSchema),
+  rowGroupCols: z.array(z.string()),
+  expandedGroups: z.set(z.string()),
+  displayRows: z.array(DisplayRowSchema),
+  pageDisplayRows: z.array(DisplayRowSchema),
+  totalRows: z.number(),
+});
+export type GridState = z.infer<typeof GridStateSchema>;
+
+const RowTransactionSchema = z.object({
+  add: z.array(RowDataSchema).optional(),
+  update: z.array(RowDataSchema).optional(),
+  remove: z.array(RowDataSchema).optional(),
+  addIndex: z.number().optional(),
+  /** Actualiza por referencia de nodo: no depende de getRowId. */
+  nodos: z.array(z.object({ node: RowNodeSchema, data: RowDataSchema })).optional(),
+});
+export type RowTransaction = z.infer<typeof RowTransactionSchema>;
+
+const TransactionResultSchema = z.object({
+  add: z.array(RowNodeSchema),
+  update: z.array(RowNodeSchema),
+  remove: z.array(RowNodeSchema),
+});
+export type TransactionResult = z.infer<typeof TransactionResultSchema>;
+
+const TransformadorModeloSchema = z.object({
+  etapa: z.string(),
+  aplicar: z.function({ input: [z.array(z.unknown())], output: z.array(z.unknown()) }),
+  activo: z.function({ input: [], output: z.boolean() }).optional(),
+});
+export type TransformadorModelo = { etapa: string; aplicar: (filas: unknown[]) => unknown[]; activo?: () => boolean };
+
+export type GridListener = (state: GridState, reason?: string) => void;
+
+const GridApiSchema = z.object({
+  getState: z.function({ input: [], output: z.unknown() /* TODO: ref GridState */ }),
+  subscribe: z.function({ input: [z.unknown() /* TODO: ref GridListener */], output: z.function({ input: [], output: z.void() }) }),
+  setRows: z.function({ input: [z.union([z.array(z.unknown() /* TODO: ref RowData */), z.null(), z.undefined()])], output: z.void() }),
+  setColumnDefs: z.function({ input: [z.union([z.array(z.unknown() /* TODO: ref ColumnDef */), z.null(), z.undefined()])], output: z.void() }),
+  setSortModel: z.function({ input: [z.unknown() /* TODO: ref SortModel */], output: z.void() }),
+  toggleSort: z.function({ input: [z.string(), z.boolean()], output: z.void() }),
+  setFilter: z.function({ input: [z.string(), z.union([z.unknown() /* TODO: ref ColumnFilter */, z.null()])], output: z.void() }),
+  setQuickFilter: z.function({ input: [z.string()], output: z.void() }),
+  setSelection: z.function({ input: [z.unknown() /* TODO: ref Iterable<...> */], output: z.void() }),
+  setDensity: z.function({ input: [z.unknown() /* TODO: ref DensityName */], output: z.void() }),
+  setPage: z.function({ input: [z.number()], output: z.void() }),
+  setPageSize: z.function({ input: [z.number()], output: z.void() }),
+  resizeColumn: z.function({ input: [z.string(), z.number()], output: z.void() }),
+  pinColumn: z.function({ input: [z.string(), z.union([z.unknown() /* TODO: ref PinSideName */, z.null()])], output: z.void() }),
+  hideColumn: z.function({ input: [z.string(), z.boolean()], output: z.void() }),
+  reorderColumn: z.function({ input: [z.string(), z.number()], output: z.void() }),
+  autosizeColumn: z.function({ input: [z.string()], output: z.void() }),
+  setRowGroupCols: z.function({ input: [z.array(z.string())], output: z.void() }),
+  addRowGroupCol: z.function({ input: [z.string(), z.number()], output: z.void() }),
+  removeRowGroupCol: z.function({ input: [z.string()], output: z.void() }),
+  toggleGroup: z.function({ input: [z.string()], output: z.void() }),
+  expandAllGroups: z.function({ input: [], output: z.void() }),
+  collapseAllGroups: z.function({ input: [], output: z.void() }),
+  getColumns: z.function({ input: [], output: z.array(z.unknown() /* TODO: ref ColumnState */) }),
+  getDisplayedRows: z.function({ input: [], output: z.array(z.unknown() /* TODO: ref RowNode */) }),
+  getAllRows: z.function({ input: [], output: z.array(z.unknown() /* TODO: ref RowNode */) }),
+  serializeState: z.function({ input: [], output: z.string() }),
+  loadState: z.function({ input: [z.string()], output: z.void() }),
+  getRowNode: z.function({ input: [z.string()], output: z.unknown() /* RowNode | null */ }),
+  applyTransaction: z.function({ input: [RowTransactionSchema], output: TransactionResultSchema }),
+  moveRow: z.function({ input: [z.string(), z.number()], output: z.void() }),
+  setTransforms: z.function({ input: [z.array(TransformadorModeloSchema)], output: z.void() }),
+  setFilterEvaluators: z.function({ input: [z.unknown()], output: z.void() }),
+  setExternalFilter: z.function({ input: [z.unknown()], output: z.void() }),
+  invalidate: z.function({ input: [z.string()], output: z.void() }),
+  setPagination: z.function({ input: [z.boolean()], output: z.void() }),
+  aggregate: z.function({ input: [z.array(RowNodeSchema)], output: z.record(z.string(), z.unknown()) }),
+});
+/** Los campos con referencias circulares quedan como `unknown` en el schema: aqui llevan su tipo real. */
+export type GridApi = Omit<z.infer<typeof GridApiSchema>, 'getState' | 'subscribe' | 'setRows' | 'setColumnDefs' | 'setSortModel' | 'toggleSort' | 'setFilter' | 'setSelection' | 'setDensity' | 'pinColumn' | 'addRowGroupCol' | 'getColumns' | 'getDisplayedRows' | 'getAllRows' | 'getRowNode' | 'setTransforms' | 'setFilterEvaluators' | 'setExternalFilter' | 'invalidate' | 'loadState'> & { getState(): GridState; subscribe(fn: (state: GridState, reason?: string) => void): () => void; setRows(rows: RowData[] | null | undefined): void; setColumnDefs(defs: ColumnDef[] | null | undefined): void; setSortModel(model: SortModel): void; toggleSort(colId: string, additive?: boolean): void; setFilter(colId: string, filter: ColumnFilter | null): void; setSelection(ids: Iterable<string>): void; setDensity(d: DensityName): void; pinColumn(colId: string, side: PinSideName | null): void; addRowGroupCol(colId: string, index?: number): void; getColumns(): ColumnState[]; getDisplayedRows(): RowNode[]; getAllRows(): RowNode[]; getRowNode(id: string): RowNode | null; setTransforms(lista: { etapa: string; aplicar: (filas: unknown[]) => unknown[]; activo?: () => boolean }[]): void; setFilterEvaluators(mapa: EvaluadoresFiltro): void; setExternalFilter(fn: FiltroExterno | null): void; invalidate(desde?: 'filtrar' | 'ordenar' | 'agrupar'): void; loadState(json: string): void; };
+
+/** Evaluadores por `type` de filtro que aportan los plugins; ganan al nativo. */
+export type EvaluadoresFiltro = Map<string, (f: unknown, valor: unknown, texto: string, node: RowNode, col: ColumnState) => boolean>;
+export type FiltroExterno = (node: RowNode) => boolean;
+/** Lectores que inyecta la capa de render para que motor y celda lean igual. */
+export type Lectora = { __leer?: { valor: (col: ColumnState, node: RowNode) => unknown; texto: (col: ColumnState, node: RowNode) => string } };

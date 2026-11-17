@@ -1,0 +1,1 @@
+import{z as e}from"zod";var r=e.record(e.string(),e.unknown()),l=e.record(e.string(),e.record(e.string(),r)),s=e.object({cleared:e.boolean(),tags:e.array(e.string())}),o=e.union([e.literal("reload"),e.literal("always")]),c=e.object({tag:e.string(),restorePolicy:o.optional()});

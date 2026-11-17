@@ -1,1 +1,1 @@
-import{a,b,c,d,e,f,g,h}from"../_chunks/chunk-Z22CHROR.mjs";export{d as APP_TAGS,a as KIT_TAGS,c as PREFIJO,b as SHELL_CRITICO,e as VIEW_TAGS,g as mapaRutas,f as rutaComponente,h as tagsArranque};
+import{a,b,c,d,e,f,g,h,i}from"../_chunks/chunk-Z6QWEO65.mjs";export{e as APP_TAGS,a as KIT_TAGS,d as OVERRIDES_KIT,c as PREFIJO,b as SHELL_CRITICO,f as VIEW_TAGS,h as mapaRutas,g as rutaComponente,i as tagsArranque};

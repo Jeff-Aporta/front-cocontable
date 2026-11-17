@@ -12,6 +12,7 @@
 
 .titulo {
   @include v.titulo;
+  @include v.sello(coco);
 }
 
 .buscar {

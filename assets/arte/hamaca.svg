@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <path id="hamaca-fronda" d="M0 0C12-17 40-23 64-5C42-9 20-2 0 0Z"/>
+    <g id="hamaca-lado">
+      <use href="#hamaca-fronda" fill="#1f7a45" transform="rotate(-82)"/>
+      <use href="#hamaca-fronda" fill="#2e9e5b" transform="rotate(-46)"/>
+      <use href="#hamaca-fronda" fill="#5cc27a" transform="rotate(-10)"/>
+      <use href="#hamaca-fronda" fill="#2e9e5b" transform="rotate(26)"/>
+    </g>
+    <g id="hamaca-corona">
+      <use href="#hamaca-lado"/>
+      <use href="#hamaca-lado" transform="scale(-1 1) rotate(8)"/>
+      <circle cx="-4" cy="5" r="5" fill="#7a4a24"/>
+      <circle cx="5" cy="6" r="5" fill="#a8692f"/>
+    </g>
+    <linearGradient id="hamaca-tela" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff7a59"/>
+      <stop offset="1" stop-color="#ffb347"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="200" cy="228" rx="190" ry="11" fill="#f4d9a0"/>
+  <ellipse cx="205" cy="226" rx="90" ry="7" fill="#0b2a4a" opacity=".2"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M52 230Q46 150 86 86" stroke="#7a4a24" stroke-width="13"/>
+    <path d="M52 230Q46 150 86 86" stroke="#a8692f" stroke-width="8" stroke-dasharray="2 8"/>
+    <path d="M352 230Q356 150 324 88" stroke="#7a4a24" stroke-width="13"/>
+    <path d="M352 230Q356 150 324 88" stroke="#a8692f" stroke-width="8" stroke-dasharray="2 8"/>
+  </g>
+  <use href="#hamaca-corona" transform="translate(86 86) scale(1.1)"/>
+  <use href="#hamaca-corona" transform="translate(324 88) scale(1.1)"/>
+  <path d="M86 98L96 104M86 98L96 110M324 100L314 106M324 100L314 112" stroke="#e8c27a" stroke-width="1.5" fill="none"/>
+  <path d="M92 102Q205 208 318 102Q205 244 92 102Z" fill="url(#hamaca-tela)"/>
+  <path d="M100 112Q205 212 310 112" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="6 5" opacity=".7"/>
+  <g stroke-linecap="round" fill="none">
+    <path d="M246 140Q268 138 288 126" stroke="#f0b98d" stroke-width="10"/>
+    <path d="M186 133Q165 128 154 116" stroke="#f0b98d" stroke-width="8"/>
+  </g>
+  <ellipse cx="208" cy="137" rx="42" ry="12" fill="#ffffff"/>
+  <ellipse cx="208" cy="141" rx="42" ry="8" fill="#7fd8e8" opacity=".5"/>
+  <ellipse cx="236" cy="140" rx="20" ry="10" fill="#1e90ff"/>
+  <circle cx="150" cy="130" r="12" fill="#f0b98d"/>
+  <path d="M138 128Q148 112 164 126Q150 122 138 128Z" fill="#7a4a24"/>
+  <path d="M140 124Q150 114 162 122L166 126L138 130Z" fill="#ffb347"/>
+  <rect x="150" y="127" width="11" height="4" rx="2" fill="#0f1b2d" opacity=".85"/>
+  <ellipse cx="288" cy="126" rx="6" ry="4" fill="#f0b98d"/>
+  <path d="M196 200L214 200L211 224Q210 227 207 227L203 227Q200 227 199 224Z" fill="#ff7a59"/>
+  <path d="M196 200L214 200L213 207L197 207Z" fill="#ffb347"/>
+  <path d="M208 200L214 186" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="188" cy="224" r="3" fill="#7a4a24"/>
+</svg>

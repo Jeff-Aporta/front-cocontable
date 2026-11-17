@@ -1,0 +1,5 @@
+function d(a){return(a.filaHasta-a.filaDesde+1)*(a.colHasta-a.colDesde+1)}function p(a,e){return a.includes(e)||a.includes(`
+`)||a.includes("\r")||a.includes('"')?`"${a.replaceAll('"','""')}"`:a}function H(a,e){return a.map(i=>i.map(n=>p(n,e)).join(e)).join(`
+`)}function m(a,e,i=!1){let n=[],l=[],s="",c=!1;for(let o=0;o<a.length;o++){let t=a[o]??"";if(c){t==='"'&&a[o+1]==='"'?(s+='"',o++):t==='"'?c=!1:s+=t;continue}t==='"'&&s===""?c=!0:a.startsWith(e,o)?(l.push(s),s="",o+=e.length-1):t===`
+`||t==="\r"?(t==="\r"&&a[o+1]===`
+`&&o++,l.push(s),n.push(l),l=[],s=""):s+=t}l.push(s),n.push(l);let f=n[n.length-1];return f?.length===1&&f[0]===""&&!i&&n.length>1&&n.pop(),n}function R(a,e){let i=a.length,n=a[0]?.length??0;if(!i||!n)return a;let l=e.filaHasta-e.filaDesde+1,s=e.colHasta-e.colDesde+1,c=d(e)>i*n,f=l%i===0&&s%n===0;if(!c||!f)return a;let r=[];for(let o=0;o<l;o++){let t=a[o%i]??[],g=[];for(let u=0;u<s;u++)g.push(t[u%n]??"");r.push(g)}return r}export{H as aTexto,R as ajustarAlRango,m as desdeTexto};

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140">
+  <defs>
+    <radialGradient id="agua-de-coco-piel" cx=".35" cy=".3" r=".9">
+      <stop offset="0" stop-color="#7fd68f"/>
+      <stop offset="1" stop-color="#2e9e5b"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="60" cy="130" rx="38" ry="6" fill="#0b2a4a" opacity=".22"/>
+  <path d="M60 128C26 128 14 100 14 80C14 56 32 44 60 44C88 44 106 56 106 80C106 100 94 128 60 128Z" fill="url(#agua-de-coco-piel)"/>
+  <path d="M26 86Q28 112 50 122" fill="none" stroke="#1f7a45" stroke-width="3" opacity=".4" stroke-linecap="round"/>
+  <path d="M94 76Q92 66 82 60" fill="none" stroke="#ffffff" stroke-width="4" opacity=".4" stroke-linecap="round"/>
+  <ellipse cx="60" cy="50" rx="34" ry="11" fill="#f7efd6"/>
+  <ellipse cx="60" cy="52" rx="29" ry="8" fill="#7fd8e8"/>
+  <ellipse cx="52" cy="50" rx="10" ry="2.5" fill="#ffffff" opacity=".6"/>
+  <path d="M68 52L94 12" stroke="#ff7a59" stroke-width="5" stroke-linecap="round"/>
+  <path d="M74 43L79 36M84 28L88 22" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+  <path d="M44 52L34 10" stroke="#7a4a24" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M10 22Q30 -2 56 18Q46 14 34 16Q22 14 10 22Z" fill="#ff7a59"/>
+  <path d="M26 6Q34 2 42 8L34 16Q30 12 26 6Z" fill="#ffffff"/>
+  <circle cx="33" cy="4" r="2.2" fill="#ffb347"/>
+</svg>

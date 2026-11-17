@@ -131,6 +131,7 @@ class CocoInformes extends Componente<SinProps> {
           ${grupos.map((g) => html`<section class="grupo"><h2>${g}</h2>${this.#lista.filter((i) => i['grupo'] === g).map((i) => html`<button class="item" type="button" data-informe=${String(i['nombre'])} ?data-actual=${i['nombre'] === this.#actual} onclick=${() => this.#elegir(String(i['nombre']))}>${String(i['titulo'])}</button>`)}</section>`)}
         </nav>
         <section class="informe" part="informe">
+          <div class="elegir">${selector('Informe', this.#lista.map((i) => ({ valor: String(i['nombre']), texto: `${String(i['grupo'])} · ${String(i['titulo'])}` })), this.#actual, (v) => { if (v && v !== this.#actual) this.#elegir(v); })}</div>
           <header class="barra">
             <h2 class="nombre">${titulo}</h2>
             <iswc-button variant="outlined" data-exportar onclick=${() => descargar(`${this.#actual}-${hoy()}.csv`, aCsv(filas, usadas.length ? usadas : columnas))}><iswc-icon slot="prefix" icon="mdi:microsoft-excel"></iswc-icon>Exportar a Excel</iswc-button>
