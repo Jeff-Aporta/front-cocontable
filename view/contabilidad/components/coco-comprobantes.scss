@@ -1,0 +1,168 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "vista" as v;
+
+/* coco-comprobantes — lista con filtros y el editor: encabezado, renglón nuevo, renglones con totales y diferencia. */
+:host {
+  @include m.host-bloque;
+}
+
+.barra {
+  @include v.barra;
+}
+
+.titulo {
+  @include v.titulo;
+}
+
+.aviso {
+  @include v.aviso;
+}
+
+.pista {
+  margin: t.esp(2) 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.totales {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: t.esp(3);
+  margin-bottom: t.esp(4);
+}
+
+.filtro {
+  width: 13rem;
+}
+
+.volver {
+  margin-bottom: t.esp(2);
+}
+
+.estado {
+  padding: t.esp(1) t.esp(2);
+  border-radius: t.radio(sm);
+  background: color-mix(in srgb, var(--iswc-warning, orange) 22%, transparent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+
+  &[data-estado="finalizado"] {
+    background: color-mix(in srgb, var(--iswc-success, seagreen) 22%, transparent);
+  }
+
+  &[data-estado="anulado"] {
+    background: color-mix(in srgb, var(--iswc-danger, crimson) 22%, transparent);
+  }
+}
+
+.diferencia,
+.cuadra,
+.total {
+  padding: t.esp(1) t.esp(3);
+  border-radius: t.radio(md);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.diferencia {
+  background: var(--iswc-danger, crimson);
+  color: #fff;
+}
+
+.cuadra {
+  background: color-mix(in srgb, var(--iswc-success, seagreen) 22%, transparent);
+}
+
+.total {
+  background: color-mix(in srgb, var(--iswc-brand) 16%, transparent);
+}
+
+.encabezado {
+  @include v.campos(14rem);
+  margin-bottom: t.esp(4);
+}
+
+.dato {
+  display: grid;
+  margin: 0;
+
+  small {
+    @include m.rotulo(0.6);
+    font-size: 0.7rem;
+  }
+}
+
+.nuevo {
+  @include v.superficie;
+  display: grid;
+  grid-template-columns: minmax(14rem, 2fr) minmax(10rem, 2fr) 9rem 9rem auto;
+  align-items: end;
+  gap: t.esp(3);
+  margin-bottom: t.esp(3);
+  padding: t.esp(3);
+}
+
+.renglones {
+  @include v.superficie;
+  margin-bottom: t.esp(4);
+  overflow-x: auto;
+}
+
+.fila-r {
+  display: grid;
+  grid-template-columns: minmax(12rem, 2fr) minmax(8rem, 1.5fr) minmax(8rem, 2fr) 9rem 9rem 2.5rem;
+  align-items: center;
+  gap: t.esp(2);
+  min-width: 44rem;
+  padding: t.esp(2) t.esp(3);
+  border-bottom: 1px solid var(--iswc-border-soft);
+
+  &.cabecera {
+    @include m.rotulo(0.65);
+    font-size: 0.72rem;
+  }
+
+  &.totales {
+    display: grid;
+    margin: 0;
+    border-bottom: 0;
+    font-weight: 750;
+  }
+}
+
+.der {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.quitar {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: t.radio(sm);
+  background: transparent;
+  color: var(--iswc-danger, crimson);
+  cursor: pointer;
+}
+
+.vacio {
+  @include v.aviso;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: t.esp(3);
+  margin-top: t.esp(4);
+}
+
+@media (max-width: 900px) {
+  .nuevo {
+    grid-template-columns: 1fr 1fr;
+  }
+}

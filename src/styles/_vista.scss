@@ -1,0 +1,55 @@
+// _vista.scss — patrones de las pantallas de CoContable (barra de la vista, título, avisos, rejillas de campos y
+// tarjetas). Colores siempre desde tokens `--iswc-*` del kit.
+//
+// USO:
+//   @use "vista" as v;
+//   .barra { @include v.barra; }
+@use "tokens" as t;
+
+/// Barra de una vista: título a la izquierda, acciones a la derecha; se parte en varias líneas si no cabe.
+@mixin barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: t.esp(3);
+  margin-bottom: t.esp(4);
+}
+
+/// Título de una vista con su ícono.
+@mixin titulo {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: t.esp(2);
+  min-width: 12rem;
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+
+  iswc-icon {
+    color: var(--iswc-brand);
+  }
+}
+
+/// Texto de estado (cargando, vacío, error suave).
+@mixin aviso {
+  margin: t.esp(6) 0;
+  opacity: 0.7;
+  text-align: center;
+}
+
+/// Rejilla de campos de formulario: tantas columnas como quepan.
+@mixin campos($minimo: 15rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, #{$minimo}), 1fr));
+  gap: t.esp(3) t.esp(4);
+  align-items: start;
+}
+
+/// Superficie elevada (tarjeta, panel de totales).
+@mixin superficie {
+  border: 1px solid var(--iswc-border-soft);
+  border-radius: t.radio(lg);
+  background: var(--iswc-surface);
+}

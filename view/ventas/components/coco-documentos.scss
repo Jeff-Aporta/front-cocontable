@@ -1,0 +1,54 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "vista" as v;
+
+/* coco-documentos — barra con filtro de estado y «Nuevo», tabla y diálogo de detalle. */
+:host {
+  @include m.host-bloque;
+}
+
+.barra {
+  @include v.barra;
+}
+
+.titulo {
+  @include v.titulo;
+}
+
+.filtro {
+  width: 13rem;
+}
+
+.aviso {
+  @include v.aviso;
+}
+
+.volver {
+  margin-bottom: t.esp(2);
+}
+
+iswc-dialog {
+  --width: min(54rem, 94vw);
+}
+
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: t.esp(1) t.esp(4);
+  margin: 0 0 t.esp(4);
+
+  dt {
+    @include m.rotulo(0.6);
+    font-size: 0.7rem;
+  }
+
+  dd {
+    margin: 0 0 t.esp(2);
+  }
+
+  .total {
+    color: var(--iswc-brand);
+    font-size: 1.3rem;
+    font-weight: 800;
+  }
+}

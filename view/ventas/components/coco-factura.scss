@@ -1,0 +1,220 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "vista" as v;
+
+/* coco-factura — encabezado en rejilla, buscador, renglones como tabla editable y pie con totales grandes. */
+:host {
+  @include m.host-bloque;
+}
+
+.barra {
+  @include v.barra;
+}
+
+.titulo {
+  @include v.titulo;
+}
+
+.estado {
+  padding: t.esp(1) t.esp(2);
+  border-radius: t.radio(sm);
+  background: color-mix(in srgb, var(--iswc-warning, orange) 22%, transparent);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.atajos {
+  @include m.rotulo(0.6);
+  font-size: 0.7rem;
+}
+
+.aviso-demo {
+  margin-bottom: t.esp(3);
+}
+
+.encabezado {
+  @include v.campos(13rem);
+  margin-bottom: t.esp(3);
+}
+
+.con-boton {
+  display: flex;
+  align-items: end;
+  gap: t.esp(2);
+
+  > :first-child {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.buscador {
+  margin-bottom: t.esp(3);
+}
+
+.renglones {
+  @include v.superficie;
+  overflow-x: auto;
+}
+
+.fila-r {
+  display: grid;
+  grid-template-columns: minmax(12rem, 1fr) 6rem 9rem 6rem 6rem 9rem 2.5rem;
+  align-items: center;
+  gap: t.esp(2);
+  min-width: 46rem;
+  padding: t.esp(2) t.esp(3);
+  border-bottom: 1px solid var(--iswc-border-soft);
+
+  &.cabecera {
+    @include m.rotulo(0.65);
+    font-size: 0.72rem;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.producto {
+  display: grid;
+  min-width: 0;
+
+  strong,
+  small {
+    @include m.una-linea;
+  }
+
+  small {
+    opacity: 0.65;
+  }
+}
+
+.der {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.quitar {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: t.radio(sm);
+  background: transparent;
+  color: var(--iswc-danger, crimson);
+  cursor: pointer;
+
+  &:hover {
+    background: color-mix(in srgb, var(--iswc-danger, crimson) 12%, transparent);
+  }
+}
+
+.vacio {
+  @include v.aviso;
+}
+
+.pie {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 24rem);
+  gap: t.esp(4);
+  margin-top: t.esp(4);
+}
+
+.lado {
+  display: grid;
+  align-content: start;
+  gap: t.esp(3);
+}
+
+.retenciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: t.esp(2) t.esp(4);
+
+  .rotulo {
+    @include m.rotulo(0.65);
+    width: 100%;
+    font-size: 0.72rem;
+  }
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.totales {
+  @include v.superficie;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: t.esp(1) t.esp(4);
+  align-items: center;
+  margin: 0;
+  padding: t.esp(4);
+
+  dd {
+    margin: 0;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .grande {
+    padding-top: t.esp(2);
+    border-top: 1px solid var(--iswc-border-soft);
+    font-size: 1.6rem;
+    font-weight: 800;
+  }
+
+  dd.grande {
+    color: var(--iswc-brand);
+  }
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: t.esp(3);
+  margin-top: t.esp(4);
+}
+
+.hecho {
+  display: grid;
+  justify-items: center;
+  gap: t.esp(2);
+  padding: t.esp(10) t.esp(4);
+  text-align: center;
+
+  > iswc-icon {
+    color: var(--iswc-success, seagreen);
+    font-size: 4rem;
+  }
+
+  h1,
+  p {
+    margin: 0;
+  }
+
+  .total {
+    font-size: 2.4rem;
+    font-weight: 800;
+  }
+
+  .fila {
+    display: flex;
+    gap: t.esp(3);
+    margin-top: t.esp(4);
+  }
+}
+
+@media (max-width: 800px) {
+  .pie {
+    grid-template-columns: 1fr;
+  }
+}

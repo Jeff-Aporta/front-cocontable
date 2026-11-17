@@ -1,0 +1,12 @@
+@use "mixins" as m;
+
+/* coco-tabla — la grilla del kit ocupando el ancho; el vacío centrado. */
+:host {
+  @include m.host-bloque;
+}
+
+iswc-data-grid {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}

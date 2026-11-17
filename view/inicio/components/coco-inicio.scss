@@ -1,0 +1,64 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "vista" as v;
+
+/* coco-inicio — tablero: saludo, tarjetas del mes, gráfica de los últimos meses y últimos documentos. */
+:host {
+  @include m.host-bloque;
+}
+
+.barra {
+  @include v.barra;
+}
+
+.titulo {
+  @include v.titulo;
+}
+
+.demo {
+  margin-bottom: t.esp(4);
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: t.esp(3);
+  margin-bottom: t.esp(5);
+}
+
+.tarjeta {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--iswc-brand);
+    outline-offset: 2px;
+    border-radius: t.radio(lg);
+  }
+}
+
+.dos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: t.esp(4);
+}
+
+.bloque {
+  @include v.superficie;
+  min-width: 0;
+  padding: t.esp(4);
+
+  h2 {
+    margin: 0 0 t.esp(3);
+    font-size: 1rem;
+  }
+}
+
+.aviso {
+  @include v.aviso;
+}

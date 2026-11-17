@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="CoContable">
+  <title>CoContable</title>
+  <!-- Coco contador: isotipo vectorial de CoContable -->
+  <ellipse cx="128" cy="236" rx="62" ry="9" fill="#0B2E4F" opacity=".12"/>
+  <!-- hojas de palma -->
+  <path d="M126 70 C112 38 84 30 58 40 C78 44 96 54 108 72 Z" fill="#2F7D3A"/>
+  <path d="M130 70 C140 34 170 22 202 30 C180 38 160 52 146 74 Z" fill="#3E9B47"/>
+  <path d="M128 72 C126 54 128 42 134 32" fill="none" stroke="#2F7D3A" stroke-width="6" stroke-linecap="round"/>
+  <!-- cuerpo -->
+  <path d="M128 66 C178 66 206 110 206 156 C206 202 172 230 128 230 C84 230 50 202 50 156 C50 110 78 66 128 66 Z" fill="#8CC63F" stroke="#2E5E1E" stroke-width="6"/>
+  <path d="M84 104 C72 124 68 150 74 176" fill="none" stroke="#C8E59A" stroke-width="10" stroke-linecap="round"/>
+  <!-- gafas -->
+  <circle cx="102" cy="134" r="22" fill="#FFFFFF" stroke="#0B2E4F" stroke-width="8"/>
+  <circle cx="154" cy="134" r="22" fill="#FFFFFF" stroke="#0B2E4F" stroke-width="8"/>
+  <path d="M124 132 Q128 126 132 132" fill="none" stroke="#0B2E4F" stroke-width="7" stroke-linecap="round"/>
+  <path d="M80 130 L64 124 M176 130 L192 124" stroke="#0B2E4F" stroke-width="7" stroke-linecap="round"/>
+  <!-- ojos -->
+  <circle cx="104" cy="137" r="9" fill="#0B2E4F"/>
+  <circle cx="152" cy="137" r="9" fill="#0B2E4F"/>
+  <circle cx="107" cy="133" r="3.2" fill="#FFFFFF"/>
+  <circle cx="155" cy="133" r="3.2" fill="#FFFFFF"/>
+  <!-- sonrisa -->
+  <path d="M104 170 Q128 190 152 170" fill="none" stroke="#0B2E4F" stroke-width="7" stroke-linecap="round"/>
+  <!-- corbata -->
+  <path d="M120 194 L136 194 L132 202 L140 226 L128 232 L116 226 L124 202 Z" fill="#0B2E4F"/>
+  <path d="M120 194 L136 194 L132 202 L124 202 Z" fill="#12A4A6"/>
+</svg>

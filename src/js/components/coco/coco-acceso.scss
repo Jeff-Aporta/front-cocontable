@@ -1,0 +1,25 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* coco-acceso — diálogo angosto con los campos apilados. */
+:host {
+  @include m.host-bloque;
+}
+
+iswc-dialog {
+  --width: min(26rem, 94vw);
+}
+
+.acceso {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.lema {
+  margin: 0;
+  opacity: 0.75;
+}
+
+[hidden] {
+  display: none;
+}

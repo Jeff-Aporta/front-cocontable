@@ -1,0 +1,26 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "vista" as v;
+
+/* coco-ficha — formulario en diálogo: pestañas arriba, campos en rejilla, error abajo. */
+:host {
+  @include m.host-bloque;
+}
+
+iswc-dialog {
+  --width: min(56rem, 94vw);
+}
+
+.ficha {
+  display: grid;
+  gap: t.esp(4);
+}
+
+.campos {
+  @include v.campos;
+  padding: t.esp(3) 0;
+}
+
+[hidden] {
+  display: none;
+}

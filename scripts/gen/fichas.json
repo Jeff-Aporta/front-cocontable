@@ -1,0 +1,539 @@
+[
+  {
+    "tag": "coco-app",
+    "titulo": "Shell",
+    "descripcion": "Shell de CoContable sin barra superior: panel izquierdo con marca, módulos y usuario, y un área de trabajo divisible en dos vistas.",
+    "proposito": "Arma toda la app. El panel izquierdo lleva arriba la marca y el botón hamburguesa (lo colapsa a íconos), en el centro la navegación por módulos y abajo la empresa activa y el usuario. El área de trabajo muestra una vista o dos (lado a lado o una sobre otra). Recuerda ancho, colapso, vistas y orientación en las preferencias del usuario.",
+    "anatomia": [
+      "<coco-app>",
+      "  #shadow-root",
+      "    <iswc-split-panel class=\"marco\">            (o <div class=\"marco colapsado\">)",
+      "      <aside part=\"lateral\">  marca · <nav> módulos · acciones · <footer part=\"pie\"> empresa y usuario",
+      "      <main part=\"trabajo\">   <section part=\"panel\"> vista   (1 o 2, en <iswc-split-panel>)",
+      "    <coco-acceso>"
+    ],
+    "props": [
+      {
+        "nombre": "paneles",
+        "tipo": "string[]",
+        "defecto": [
+          "inicio"
+        ],
+        "que": "Ids de los módulos abiertos (1 o 2), de `core/menu.ts`."
+      },
+      {
+        "nombre": "activo",
+        "tipo": "number",
+        "defecto": 0,
+        "que": "Cuál de las vistas recibe los clics del menú."
+      },
+      {
+        "nombre": "colapsado",
+        "tipo": "boolean",
+        "defecto": false,
+        "que": "Panel izquierdo reducido a íconos."
+      },
+      {
+        "nombre": "orientacion",
+        "tipo": "string",
+        "defecto": "horizontal",
+        "opciones": [
+          "horizontal",
+          "vertical"
+        ],
+        "que": "Cómo se reparten dos vistas."
+      },
+      {
+        "nombre": "ancho",
+        "tipo": "number",
+        "defecto": 20,
+        "que": "Ancho del panel izquierdo en porcentaje."
+      }
+    ],
+    "cuando": "Una sola vez, en index.html, como raíz de la app.",
+    "cuandoNo": "Dentro de otra vista: ocupa el alto completo de la ventana."
+  },
+  {
+    "tag": "coco-acceso",
+    "titulo": "Acceso",
+    "descripcion": "Diálogo para iniciar sesión o crear la cuenta contra el API de CoContable.",
+    "proposito": "Pide usuario y contraseña (y nombre y correo al crear la cuenta), llama al API y avisa a toda la app con el evento de ventana `coco:sesion`. La contraseña nunca se guarda.",
+    "anatomia": [
+      "<coco-acceso>",
+      "  #shadow-root",
+      "    <iswc-dialog>",
+      "      <form class=\"acceso\">  <iswc-input> × 2-4 · <iswc-callout data-error>",
+      "      <iswc-button slot=\"footer\"> × 2"
+    ],
+    "props": [
+      {
+        "nombre": "abierto",
+        "tipo": "boolean",
+        "defecto": true,
+        "que": "Muestra el diálogo."
+      },
+      {
+        "nombre": "modo",
+        "tipo": "string",
+        "defecto": "entrar",
+        "opciones": [
+          "entrar",
+          "crear"
+        ],
+        "que": "Iniciar sesión o crear la cuenta."
+      }
+    ],
+    "eventos": [
+      {
+        "nombre": "coco-cerrar",
+        "detalle": "{}",
+        "cuando": "Al entrar con éxito o al cerrar el diálogo."
+      }
+    ],
+    "cuando": "Lo monta el shell; otra vista lo pide con el evento de ventana `coco:acceso`.",
+    "cuandoNo": "Para proteger una vista: sin sesión la app muestra la empresa demo en solo lectura."
+  },
+  {
+    "tag": "coco-tabla",
+    "titulo": "Tabla",
+    "descripcion": "Tabla de datos sobre la grilla del kit, con columnas declarativas y aviso de la fila elegida.",
+    "proposito": "Recibe columnas (texto, dinero, número, fecha, sí/no, estado) y filas, las formatea y emite la fila al hacer clic. No conoce el API.",
+    "anatomia": [
+      "<coco-tabla>",
+      "  #shadow-root",
+      "    <iswc-data-grid part=\"tabla\">     (o <iswc-empty-state part=\"vacio\"> sin filas)"
+    ],
+    "props": [
+      {
+        "nombre": "columnas",
+        "tipo": "Columna[]",
+        "defecto": [
+          {
+            "campo": "codigo",
+            "titulo": "Código",
+            "tipo": "texto",
+            "ancho": 120
+          },
+          {
+            "campo": "nombre",
+            "titulo": "Nombre",
+            "tipo": "texto"
+          },
+          {
+            "campo": "valor",
+            "titulo": "Valor",
+            "tipo": "dinero",
+            "ancho": 140
+          }
+        ],
+        "que": "Columnas: campo, título, tipo y ancho opcional."
+      },
+      {
+        "nombre": "filas",
+        "tipo": "Fila[]",
+        "defecto": [
+          {
+            "codigo": "COCO-001",
+            "nombre": "Agua de coco 330 ml",
+            "valor": 4500
+          },
+          {
+            "codigo": "COCO-002",
+            "nombre": "Cocada blanca x 6",
+            "valor": 9800
+          }
+        ],
+        "que": "Filas tal como llegan del API."
+      },
+      {
+        "nombre": "vacio",
+        "tipo": "string",
+        "defecto": "No hay registros todavía.",
+        "que": "Texto cuando no hay filas."
+      }
+    ],
+    "eventos": [
+      {
+        "nombre": "coco-fila",
+        "detalle": "{ fila }",
+        "cuando": "Al hacer clic en una fila."
+      }
+    ],
+    "cuando": "Toda lista de la app: catálogos, documentos, cartera, informes.",
+    "cuandoNo": "Para editar celdas en línea: usa los renglones de la factura o del comprobante."
+  },
+  {
+    "tag": "coco-ficha",
+    "titulo": "Ficha",
+    "descripcion": "Formulario declarativo en un diálogo con pestañas; devuelve los valores al guardar.",
+    "proposito": "Pinta los campos que recibe con los controles del kit, agrupados por pestaña, valida los obligatorios y emite los valores. Quien la usa decide qué hacer con ellos.",
+    "anatomia": [
+      "<coco-ficha>",
+      "  #shadow-root",
+      "    <iswc-dialog part=\"dialogo\">",
+      "      <form class=\"ficha\">  <iswc-tab-group> · <div class=\"campos\"> controles · <iswc-callout data-error>",
+      "      <iswc-button slot=\"footer\"> Eliminar · Cancelar · Guardar"
+    ],
+    "props": [
+      {
+        "nombre": "titulo",
+        "tipo": "string",
+        "defecto": "Crear cliente",
+        "que": "Título del diálogo."
+      },
+      {
+        "nombre": "campos",
+        "tipo": "Campo[]",
+        "defecto": [
+          {
+            "nombre": "nit",
+            "etiqueta": "Documento",
+            "tipo": "texto",
+            "pestana": "Datos básicos",
+            "requerido": true,
+            "soloAlta": true
+          },
+          {
+            "nombre": "nombre",
+            "etiqueta": "Nombre",
+            "tipo": "texto",
+            "pestana": "Datos básicos",
+            "requerido": true,
+            "soloAlta": false
+          },
+          {
+            "nombre": "ciudad",
+            "etiqueta": "Ciudad",
+            "tipo": "texto",
+            "pestana": "Ubicación",
+            "requerido": false,
+            "soloAlta": false
+          }
+        ],
+        "que": "Campos: nombre, etiqueta, tipo, pestaña, requerido, opciones o fuente."
+      },
+      {
+        "nombre": "valores",
+        "tipo": "Fila",
+        "defecto": {},
+        "que": "Valores del registro que se edita."
+      },
+      {
+        "nombre": "alta",
+        "tipo": "boolean",
+        "defecto": true,
+        "que": "Es un registro nuevo (los campos `soloAlta` se pueden escribir)."
+      },
+      {
+        "nombre": "abierta",
+        "tipo": "boolean",
+        "defecto": true,
+        "que": "Muestra el diálogo."
+      },
+      {
+        "nombre": "guardando",
+        "tipo": "boolean",
+        "defecto": false,
+        "que": "Pone el botón Guardar en espera."
+      },
+      {
+        "nombre": "error",
+        "tipo": "string",
+        "defecto": "",
+        "que": "Mensaje de error bajo los campos."
+      },
+      {
+        "nombre": "eliminable",
+        "tipo": "boolean",
+        "defecto": false,
+        "que": "Muestra el botón Eliminar."
+      }
+    ],
+    "eventos": [
+      {
+        "nombre": "coco-guardar",
+        "detalle": "{ valores }",
+        "cuando": "Al pulsar Guardar con los obligatorios llenos."
+      },
+      {
+        "nombre": "coco-eliminar",
+        "detalle": "{}",
+        "cuando": "Al pulsar Eliminar."
+      },
+      {
+        "nombre": "coco-cerrar",
+        "detalle": "{}",
+        "cuando": "Al cancelar o cerrar el diálogo."
+      }
+    ],
+    "cuando": "Crear o editar cualquier registro de catálogo, también al vuelo desde la factura.",
+    "cuandoNo": "Documentos con renglones (factura, comprobante): tienen su propia pantalla."
+  },
+  {
+    "tag": "coco-catalogo",
+    "titulo": "Catálogo",
+    "descripcion": "Pantalla de cualquier catálogo: barra con búsqueda, exportar y crear, tabla y ficha por pestañas.",
+    "proposito": "Lee la definición del catálogo por su id (`core/catalogos.ts`), lista sus registros de la empresa activa y permite crear, editar y eliminar. Sin permiso de escritura abre la ficha en solo lectura.",
+    "anatomia": [
+      "<coco-catalogo>",
+      "  #shadow-root",
+      "    <header part=\"barra\">  título · <iswc-input class=\"buscar\"> · Exportar · Crear",
+      "    <coco-tabla part=\"tabla\">",
+      "    <coco-ficha>"
+    ],
+    "props": [
+      {
+        "nombre": "catalogo",
+        "tipo": "string",
+        "defecto": "productos",
+        "opciones": [
+          "clientes",
+          "proveedores",
+          "empleados",
+          "vendedores",
+          "productos",
+          "categorias",
+          "bodegas",
+          "centros",
+          "cuentas",
+          "tipos",
+          "impuestos",
+          "resoluciones",
+          "formas"
+        ],
+        "que": "Id del catálogo."
+      }
+    ],
+    "cuando": "Terceros, productos, plan de cuentas, tipos de comprobante, impuestos, numeraciones y formas de pago.",
+    "cuandoNo": "Libros contables (comprobantes, documentos): solo se escriben por sus flujos."
+  },
+  {
+    "tag": "coco-inicio",
+    "vista": "inicio",
+    "titulo": "Inicio",
+    "descripcion": "Tablero de inicio: tarjetas por módulo con la cifra del mes, gráfica de los últimos meses y últimos documentos.",
+    "proposito": "Muestra el estado de la empresa activa de un vistazo. Cada tarjeta abre su módulo.",
+    "anatomia": [
+      "<coco-inicio>",
+      "  #shadow-root",
+      "    <header class=\"barra\">  nombre de la empresa",
+      "    <iswc-callout class=\"demo\">              (solo en la empresa de muestra)",
+      "    <div part=\"tarjetas\">  <button class=\"tarjeta\"> <iswc-stat> × 14",
+      "    <div class=\"dos\">  <iswc-chart> · <coco-tabla>"
+    ],
+    "cuando": "Como primera vista de la app.",
+    "cuandoNo": "Para analizar cifras: usa Informes."
+  },
+  {
+    "tag": "coco-factura",
+    "vista": "ventas",
+    "titulo": "Factura / POS",
+    "descripcion": "Digitación de un documento con renglones: factura de venta, tirilla POS, cotización, remisión o factura de compra.",
+    "proposito": "Encabezado (numeración, fecha, bodega, tercero, forma de pago), buscador por nombre, referencia o código de barras, renglones editables, retenciones, totales, lo recibido y el cambio. Atajos: F9 finalizar, F4 limpiar, F2 descuento. Crea cliente y producto al vuelo. Los valores definitivos los liquida el API.",
+    "anatomia": [
+      "<coco-factura>",
+      "  #shadow-root",
+      "    <header class=\"barra\">  título · estado · atajos",
+      "    <section part=\"encabezado\">  selectores y fecha",
+      "    <section class=\"buscador\">  <iswc-input data-buscar> · crear producto",
+      "    <section part=\"renglones\">  <div class=\"fila-r\"> × n",
+      "    <section part=\"pie\">  retenciones · <dl part=\"totales\">",
+      "    <footer class=\"acciones\">  Limpiar · Guardar pendiente · Finalizar",
+      "    <coco-ficha>             (cliente o producto al vuelo)"
+    ],
+    "props": [
+      {
+        "nombre": "clase",
+        "tipo": "string",
+        "defecto": "POS",
+        "opciones": [
+          "POS",
+          "FV",
+          "COT",
+          "REM",
+          "FC"
+        ],
+        "que": "Clase de documento que digita."
+      }
+    ],
+    "eventos": [
+      {
+        "nombre": "coco-documento",
+        "detalle": "{ documento }",
+        "cuando": "Al finalizar o guardar el pendiente."
+      },
+      {
+        "nombre": "coco-imprimir",
+        "detalle": "{ documento }",
+        "cuando": "Al pedir la tirilla del documento recién finalizado."
+      }
+    ],
+    "cuando": "Vender en mostrador (POS), facturar, cotizar, remitir y registrar compras.",
+    "cuandoNo": "Recibos de caja, egresos y ajustes de inventario: tienen su ficha corta en la lista de documentos."
+  },
+  {
+    "tag": "coco-documentos",
+    "vista": "ventas",
+    "titulo": "Documentos",
+    "descripcion": "Lista de documentos por clase con su estado, y el detalle con imprimir, finalizar, anular y nota crédito.",
+    "proposito": "Lista los documentos de las clases pedidas de la empresa activa, filtra por estado, abre el detalle con sus renglones y acciones, y abre la digitación con «Nuevo».",
+    "anatomia": [
+      "<coco-documentos>",
+      "  #shadow-root",
+      "    <header class=\"barra\">  título · filtro de estado · Nuevo",
+      "    <coco-tabla>",
+      "    <iswc-dialog>            (detalle: <dl class=\"resumen\"> · <coco-tabla> · acciones)",
+      "    <coco-ficha>             (recibo, egreso o ajuste)",
+      "    <coco-factura>           (al crear un documento con productos)"
+    ],
+    "props": [
+      {
+        "nombre": "clases",
+        "tipo": "string",
+        "defecto": "FV,POS",
+        "opciones": [
+          "FV,POS",
+          "COT",
+          "REM",
+          "NCV",
+          "FC",
+          "RC",
+          "CE",
+          "AI"
+        ],
+        "que": "Clases que lista, separadas por coma."
+      },
+      {
+        "nombre": "nuevo",
+        "tipo": "string",
+        "defecto": "FV",
+        "opciones": [
+          "FV",
+          "POS",
+          "COT",
+          "REM",
+          "FC",
+          "RC",
+          "CE",
+          "AI",
+          ""
+        ],
+        "que": "Clase que crea el botón Nuevo (vacío = sin botón)."
+      }
+    ],
+    "cuando": "Facturas, cotizaciones, remisiones, notas crédito, compras, recibos, egresos y ajustes.",
+    "cuandoNo": "Asientos manuales: usa Comprobantes."
+  },
+  {
+    "tag": "coco-cartera",
+    "vista": "cartera",
+    "titulo": "Cartera",
+    "descripcion": "Cartera por cobrar o por pagar: búsqueda por nombre, totales (total, abonado, saldo, en mora), documentos pendientes, historial de abonos y registro de un abono.",
+    "proposito": "Cartera por cobrar o por pagar: búsqueda por nombre, totales (total, abonado, saldo, en mora), documentos pendientes, historial de abonos y registro de un abono.",
+    "anatomia": [
+      "<coco-cartera>",
+      "  #shadow-root",
+      "    <header class=\"barra\">  título · buscar · historial",
+      "    <div part=\"totales\">  <iswc-stat> × 4",
+      "    <coco-tabla>",
+      "    <iswc-dialog>  (historial)",
+      "    <coco-ficha>   (abono)"
+    ],
+    "props": [
+      {
+        "nombre": "tipo",
+        "tipo": "string",
+        "defecto": "CxC",
+        "opciones": [
+          "CxC",
+          "CxP"
+        ],
+        "que": "Por cobrar o por pagar."
+      }
+    ],
+    "cuando": "Cobrar a clientes y pagar a proveedores documento por documento.",
+    "cuandoNo": "Ingresos o gastos sin factura: usa Recibos de caja o Comprobantes de egreso."
+  },
+  {
+    "tag": "coco-caja",
+    "vista": "cartera",
+    "titulo": "Cierre de caja",
+    "descripcion": "Cierre de caja del día: lo esperado por el sistema contra lo contado, la diferencia y los cierres anteriores.",
+    "proposito": "Cierre de caja del día: lo esperado por el sistema contra lo contado, la diferencia y los cierres anteriores.",
+    "anatomia": [
+      "<coco-caja>",
+      "  #shadow-root",
+      "    <header class=\"barra\">  título · fecha",
+      "    <div class=\"totales\">  <iswc-stat> × 4",
+      "    <section part=\"cuadre\">  base · contado · diferencia · Cerrar caja",
+      "    <coco-tabla>  (cierres anteriores)"
+    ],
+    "cuando": "Al terminar el turno o el día en un punto de venta.",
+    "cuandoNo": "Para conciliar bancos: usa una nota de conciliación bancaria."
+  },
+  {
+    "tag": "coco-informes",
+    "vista": "informes",
+    "titulo": "Informes",
+    "descripcion": "Todos los informes en una pantalla: índice por grupo, parámetros, totales, tabla y exportación a Excel.",
+    "proposito": "Todos los informes en una pantalla: índice por grupo, parámetros, totales, tabla y exportación a Excel.",
+    "anatomia": [
+      "<coco-informes>",
+      "  #shadow-root",
+      "    <nav class=\"indice\">  grupos · <button class=\"item\"> por informe",
+      "    <section part=\"informe\">  título · Exportar · <form class=\"parametros\"> · totales · <coco-tabla>"
+    ],
+    "cuando": "Balance de prueba, auxiliar, libro diario, estado de resultados, balance general, terceros, ventas, compras, cartera, existencias, kardex y cierre de caja.",
+    "cuandoNo": "Para ver un documento puntual: ábrelo desde su lista."
+  },
+  {
+    "tag": "coco-comprobantes",
+    "vista": "contabilidad",
+    "titulo": "Comprobantes",
+    "descripcion": "Comprobantes contables: lista con filtros y editor de renglones con totales y diferencia; pendiente, finalizar, anular y eliminar.",
+    "proposito": "Comprobantes contables: lista con filtros y editor de renglones con totales y diferencia; pendiente, finalizar, anular y eliminar.",
+    "anatomia": [
+      "<coco-comprobantes>",
+      "  #shadow-root",
+      "    <header class=\"barra\">  título · filtros · Nuevo            (lista)",
+      "    <coco-tabla>",
+      "    — editor —",
+      "    <header class=\"barra\">  número y estado · diferencia · total",
+      "    <section class=\"encabezado\">  tipo · fecha · tercero · centro de costo",
+      "    <section part=\"nuevo\">  cuenta · detalle · débito · crédito · Agregar",
+      "    <section part=\"renglones\">  <div class=\"fila-r\"> × n · totales",
+      "    <footer class=\"acciones\">  Eliminar · Anular · Guardar pendiente · Finalizar"
+    ],
+    "cuando": "Notas de contabilidad, depreciación, nómina, cierres y cualquier asiento manual.",
+    "cuandoNo": "Ventas, compras, recibos y egresos: sus documentos generan el asiento solos."
+  },
+  {
+    "tag": "coco-ajustes",
+    "vista": "ajustes",
+    "titulo": "Ajustes",
+    "descripcion": "Configuración de la cuenta: empresas y equipo, agentes de IA con su bitácora, y apariencia (tema y paleta).",
+    "proposito": "Configuración de la cuenta: empresas y equipo, agentes de IA con su bitácora, y apariencia (tema y paleta).",
+    "anatomia": [
+      "<coco-ajustes>",
+      "  #shadow-root",
+      "    <header class=\"barra\">  título de la sección",
+      "    <section class=\"bloque\"> × n   (según la sección)",
+      "    <coco-ficha>             (crear o editar empresa)"
+    ],
+    "props": [
+      {
+        "nombre": "seccion",
+        "tipo": "string",
+        "defecto": "apariencia",
+        "opciones": [
+          "apariencia",
+          "empresas",
+          "agentes"
+        ],
+        "que": "Sección que muestra."
+      }
+    ],
+    "cuando": "Crear empresas, invitar al equipo, dar permisos a agentes de IA y cambiar tema o paleta.",
+    "cuandoNo": "Catálogos de la empresa (impuestos, numeraciones): tienen su propia pantalla."
+  }
+]

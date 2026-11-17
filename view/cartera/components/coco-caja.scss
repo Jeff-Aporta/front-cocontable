@@ -1,0 +1,62 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "vista" as v;
+
+/* coco-caja — lo esperado en caja, el cuadre (base, contado, diferencia) y los cierres anteriores. */
+:host {
+  @include m.host-bloque;
+}
+
+.barra {
+  @include v.barra;
+}
+
+.titulo {
+  @include v.titulo;
+}
+
+.aviso {
+  @include v.aviso;
+}
+
+.pista {
+  margin: t.esp(2) 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.totales {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: t.esp(3);
+  margin-bottom: t.esp(4);
+}
+
+.fecha {
+  width: 12rem;
+}
+
+.cuadre {
+  @include v.superficie;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  align-items: end;
+  gap: t.esp(4);
+  padding: t.esp(4);
+}
+
+.diferencia {
+  margin: 0;
+  color: var(--iswc-success, seagreen);
+  font-size: 1.25rem;
+  font-weight: 750;
+
+  &[data-mal] {
+    color: var(--iswc-danger, crimson);
+  }
+}
+
+.subtitulo {
+  margin: t.esp(6) 0 t.esp(3);
+  font-size: 1rem;
+}

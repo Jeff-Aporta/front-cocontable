@@ -1,0 +1,23 @@
+@use "mixins" as m;
+@use "vista" as v;
+
+/* coco-catalogo — barra (título, buscar, exportar, crear) y la tabla. */
+:host {
+  @include m.host-bloque;
+}
+
+.barra {
+  @include v.barra;
+}
+
+.titulo {
+  @include v.titulo;
+}
+
+.buscar {
+  width: min(100%, 18rem);
+}
+
+.aviso {
+  @include v.aviso;
+}

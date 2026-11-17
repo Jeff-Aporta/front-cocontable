@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-palette="delfin">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoContable · componentes</title>
+<meta name="robots" content="noindex">
+<script src="../../dist/cdn/boot.js?v=ww0618"></script>
+<!-- iswc:precarga:inicio -->
+<script type="importmap">{"imports":{"@jeff-aporta/iswc-base/":"https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/","zod":"https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/lib/zod.min.mjs"}}</script>
+<meta name="iswc-precargado" content="b6fcbdc395b70cfb0013b1a9c255f331547adaaa">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-2GHB5Y6L.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-2UG6R2ZP.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-2UUX5AJB.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-3GGX7YOD.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-4IEYSW7L.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-54UCP5CX.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-5HPQODJU.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-7474BMO6.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-75KJXU3G.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-7IBSWVMF.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-AZHTHQOE.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-B5DBS3UJ.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-BCKC3BAZ.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-BLKXPAQ7.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-CG4OGEFX.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-CH2ZPCUQ.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-CMZVHIC2.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-DKYDCFSD.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-E2WPECOS.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-ELDBMV4L.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-FILY35RO.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-FKA7RWJD.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-FNRVVL54.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-FOLUIIRP.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-FZCPQKWI.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-FZIVRDHK.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-I5RECJ3K.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-IMDXNU6R.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-IPGH3DHR.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-IWE2M5AU.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-JQZC545P.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-K7GY5OWC.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-KYFMDOVU.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-KZXFWPKM.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-LQ2XDX7H.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-M4ZSXRHD.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-MNP72QJS.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-MPMITNE2.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-NXPORTDE.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-O3T3RMHY.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-O5VUYSCZ.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-P6XCOQUR.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-PVUKYFEI.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-Q6J5NA4U.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-QOA2FNAZ.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-RAK5BYHT.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-RBUOPY6A.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-RF4M2ZKD.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-TLIPDXMZ.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-TPHMQPBF.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-UFMSFUKG.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-USDNRHPF.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-V4KGLLNR.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-W2TLSK2Z.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-WCSXFZQ2.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-XGSX6JGH.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/_chunks/chunk-ZVCVBQWN.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/actions/button.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/code/code.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/core/loader.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/data-viz/chart.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/data/data-grid.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/data/stat.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/feedback/empty-state.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/feedback/palette-selector.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/feedback/tag.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/feedback/toast.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/forms/input.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/forms/select.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/forms/switch.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/forms/textarea.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/layout/callout.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/layout/card.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/layout/dialog.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/layout/split-panel.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/lib/zod.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/media/icon.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/navigation/tab-group.min.mjs">
+<link rel="modulepreload" href="../../dist/cdn/_chunks/chunk-FWBWSRYW.mjs">
+<link rel="modulepreload" href="../../dist/cdn/_chunks/chunk-ZORC2ZJY.mjs">
+<link rel="modulepreload" href="../../dist/cdn/view/demo/components/coco-galeria.min.mjs?v=n6meac">
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/is-base.min.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/is-base.min.css"></noscript>
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/palettes.min.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/palettes.min.css"></noscript>
+<script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/core/loader.min.mjs"></script>
+<script type="module" src="../../dist/cdn/cocoLoader.min.mjs?v=fr0qps"></script>
+<!-- iswc:precarga:fin -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@b6fcbdc395b70cfb0013b1a9c255f331547adaaa/dist/cdn/preview/preview-component.min.css">
+<style>
+  html, body { margin: 0; height: 100%; background: var(--iswc-bg); color: var(--iswc-text); font-family: var(--iswc-sans); }
+  .galeria { display: grid; grid-template-columns: 14rem 1fr; height: 100%; }
+  .galeria nav { display: grid; align-content: start; gap: 0.25rem; padding: 0.75rem; border-right: 1px solid var(--iswc-border-soft); overflow: auto; }
+  .galeria nav iswc-button[aria-current="true"] { --iswc-button-bg: var(--iswc-brand-soft); }
+</style>
+</head>
+<body>
+  <div class="galeria">
+    <nav id="nav" aria-label="Componentes"></nav>
+    <iswc-preview-component id="preview"></iswc-preview-component>
+  </div>
+  <!-- La galería marca `data-app-ready` al montar; el watchdog revela la página si falla. -->
+  <script>setTimeout(function () { document.documentElement.setAttribute('data-app-ready', ''); }, 6000);</script>
+  <script type="module" src="../../dist/cdn/view/demo/components/coco-galeria.min.mjs?v=n6meac"></script>
+</body>
+</html>
