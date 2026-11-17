@@ -77,9 +77,15 @@ export async function pedir(metodo: string, ruta: string, cuerpo?: unknown): Pro
   const headers: Record<string, string> = { 'x-empresa': sesion.empresa };
   if (cuerpo !== undefined) headers['content-type'] = 'application/json';
   if (sesion.token) headers['authorization'] = `Bearer ${sesion.token}`;
+  const llamar = () => fetch(`${baseApi()}/${ruta}`, { method: metodo, headers, ...(cuerpo === undefined ? {} : { body: JSON.stringify(cuerpo) }) });
   let res: Response;
   try {
-    res = await fetch(`${baseApi()}/${ruta}`, { method: metodo, headers, ...(cuerpo === undefined ? {} : { body: JSON.stringify(cuerpo) }) });
+    res = await llamar();
+    // Una lectura que cae en un arranque en frío del Worker (503) se reintenta una vez; una escritura nunca se repite sola.
+    if (res.status === 503 && metodo === 'GET') {
+      await new Promise((r) => setTimeout(r, 900));
+      res = await llamar();
+    }
   } catch {
     throw new ErrorApi(0, 'No hay conexión con el servidor. Revisa tu internet e intenta de nuevo.');
   }
