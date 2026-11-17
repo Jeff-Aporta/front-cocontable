@@ -14,10 +14,10 @@
  * compartido sube a APP_TAGS. Se publica en `dist/cdn/js/kit-tags.min.mjs` para los hosts.
  */
 export const KIT_TAGS = [
+  'iswc-bar-chart',
   'iswc-button',
   'iswc-callout',
   'iswc-card',
-  'iswc-chart',
   'iswc-code',
   'iswc-data-grid',
   'iswc-dialog',

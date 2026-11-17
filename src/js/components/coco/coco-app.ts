@@ -29,10 +29,13 @@ class CocoApp extends Componente<CocoAppProps> {
   #listo = false;
   #acceso: 'entrar' | 'crear' | null = null;
 
+  /** Pantalla angosta (celular): el menú arranca en íconos, abierto ocupa casi todo y se cierra al elegir un módulo. */
+  static #angosto = (): boolean => typeof matchMedia === 'function' && matchMedia('(max-width: 720px)').matches;
+
   protected override inicial(): CocoAppProps {
     const p = preferenciasLocales();
     const paneles = Array.isArray(p['paneles']) ? p['paneles'].filter((x): x is string => typeof x === 'string').slice(0, 2) : [];
-    return { paneles: paneles.length ? paneles : ['inicio'], activo: 0, colapsado: p['menu'] === 'colapsado', orientacion: p['orientacion'] === 'vertical' ? 'vertical' : 'horizontal', ancho: typeof p['menuAncho'] === 'number' ? p['menuAncho'] : 20 };
+    return { paneles: paneles.length ? paneles : ['inicio'], activo: 0, colapsado: CocoApp.#angosto() || p['menu'] === 'colapsado', orientacion: p['orientacion'] === 'vertical' ? 'vertical' : 'horizontal', ancho: typeof p['menuAncho'] === 'number' ? p['menuAncho'] : 20 };
   }
 
   override onConnected(): void {
@@ -71,14 +74,16 @@ class CocoApp extends Componente<CocoAppProps> {
   #cambiar(cambios: Partial<CocoAppProps>): void {
     this.props = cambios;
     const p = this.props;
-    void guardarPreferencias({ paneles: p.paneles, menu: p.colapsado ? 'colapsado' : 'abierto', orientacion: p.orientacion, menuAncho: p.ancho });
+    // en el celular el estado del menú es de esa pantalla: no pisa la preferencia de escritorio
+    if (CocoApp.#angosto()) void guardarPreferencias({ paneles: p.paneles, orientacion: p.orientacion });
+    else void guardarPreferencias({ paneles: p.paneles, menu: p.colapsado ? 'colapsado' : 'abierto', orientacion: p.orientacion, menuAncho: p.ancho });
   }
 
-  /** Abre un módulo en el panel activo. */
+  /** Abre un módulo en el panel activo (en el celular, además, recoge el menú). */
   #abrir(id: string): void {
     const paneles = [...this.props.paneles];
     paneles[Math.min(this.props.activo, paneles.length - 1)] = id;
-    this.#cambiar({ paneles });
+    this.#cambiar(CocoApp.#angosto() ? { paneles, colapsado: true } : { paneles });
   }
 
   #dividir(): void {
@@ -158,7 +163,7 @@ class CocoApp extends Componente<CocoAppProps> {
       ? html`<iswc-split-panel class="trabajo" part="trabajo" position="50" orientation=${props.orientacion}><div slot="start" class="hueco">${vistas[0]}</div><div slot="end" class="hueco">${vistas[1]}</div></iswc-split-panel>`
       : html`<main class="trabajo" part="trabajo">${vistas[0]}</main>`;
     if (props.colapsado) root.append(html`<div class="marco colapsado">${lateral}${trabajo}</div>`);
-    else root.append(html`<iswc-split-panel class="marco" position=${String(props.ancho)} onreposition=${(e: Event) => this.#alRedimensionar(e)}><div slot="start" class="hueco">${lateral}</div><div slot="end" class="hueco">${trabajo}</div></iswc-split-panel>`);
+    else root.append(html`<iswc-split-panel class="marco" position=${CocoApp.#angosto() ? '85' : String(props.ancho)} onreposition=${(e: Event) => this.#alRedimensionar(e)}><div slot="start" class="hueco">${lateral}</div><div slot="end" class="hueco">${trabajo}</div></iswc-split-panel>`);
     const acceso = document.createElement('coco-acceso');
     Object.assign(acceso, { props: { abierto: this.#acceso !== null, modo: this.#acceso ?? 'entrar' } });
     acceso.addEventListener('coco-cerrar', () => {
@@ -171,7 +176,7 @@ class CocoApp extends Componente<CocoAppProps> {
   /** Recuerda el ancho del panel izquierdo sin repintar (el divisor ya está donde la persona lo dejó). */
   #alRedimensionar(e: Event): void {
     const panel = e.currentTarget;
-    if (!(panel instanceof HTMLElement) || !('position' in panel) || e.target !== panel) return;
+    if (CocoApp.#angosto() || !(panel instanceof HTMLElement) || !('position' in panel) || e.target !== panel) return;
     const ancho = Math.round(Number(panel.position));
     if (!Number.isFinite(ancho) || ancho < 8 || ancho > 60) return;
     void guardarPreferencias({ menuAncho: ancho });

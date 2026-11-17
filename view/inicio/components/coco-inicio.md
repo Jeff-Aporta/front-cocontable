@@ -15,7 +15,7 @@ Muestra el estado de la empresa activa de un vistazo. Cada tarjeta abre su módu
     <header class="barra">  nombre de la empresa
     <iswc-callout class="demo">              (solo en la empresa de muestra)
     <div part="tarjetas">  <button class="tarjeta"> <iswc-stat> × 14
-    <div class="dos">  <iswc-chart> · <coco-tabla>
+    <div class="dos">  <iswc-bar-chart> · <coco-tabla>
 ```
 
 ## Atributos observados

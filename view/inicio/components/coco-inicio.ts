@@ -20,7 +20,7 @@ const lista = (v: unknown): Fila[] => (Array.isArray(v) ? v.map(objeto) : []);
 class CocoInicio extends Componente<SinProps> {
   static tag = 'coco-inicio';
   static css = css;
-  static deps = ['iswc-stat', 'iswc-chart', 'iswc-icon', 'iswc-callout', 'iswc-button'];
+  static deps = ['iswc-stat', 'iswc-bar-chart', 'iswc-icon', 'iswc-callout', 'iswc-button'];
 
   #datos: Fila | null = null;
   #error = '';
@@ -90,10 +90,13 @@ class CocoInicio extends Componente<SinProps> {
     ];
     root.append(html`<div class="tarjetas" part="tarjetas">${tarjetas.map(([id, rotulo, valor, apoyo, icono, color]) => html`<button class="tarjeta" type="button" data-modulo=${id} onclick=${() => abrir(id)}><iswc-stat label=${rotulo} value=${valor} helper=${apoyo} icon=${icono} color=${color}></iswc-stat></button>`)}</div>`);
     const serie = lista(this.#datos['serie']);
-    const grafica = document.createElement('iswc-chart');
-    grafica.setAttribute('type', 'bar');
+    // iswc-bar-chart (no <iswc-chart type="bar">): el genérico solo pinta barras si el módulo de barras ya registró su
+    // dibujante; sin él quedan los ejes sin marcas (auditoría del 2026-11-17).
+    const grafica = document.createElement('iswc-bar-chart');
     grafica.setAttribute('label', 'Ingresos, costos y gastos por mes');
-    Object.assign(grafica, { config: { type: 'bar', data: { labels: serie.map((s) => String(s['mes'])), datasets: [{ label: 'Ingresos', data: serie.map((s) => num(s['ingresos'])) }, { label: 'Costos', data: serie.map((s) => num(s['costos'])) }, { label: 'Gastos', data: serie.map((s) => num(s['gastos'])) }] } } });
+    const config = { type: 'bar', data: { labels: serie.map((s) => String(s['mes'])), datasets: [{ label: 'Ingresos', data: serie.map((s) => num(s['ingresos'])) }, { label: 'Costos', data: serie.map((s) => num(s['costos'])) }, { label: 'Gastos', data: serie.map((s) => num(s['gastos'])) }] } };
+    // el módulo llega perezoso: asignar `config` antes de definirse dejaría una propiedad propia que tapa el setter
+    void customElements.whenDefined('iswc-bar-chart').then(() => Object.assign(grafica, { config }));
     const ultimos = document.createElement('coco-tabla');
     Object.assign(ultimos, { props: { columnas: [{ campo: 'numero', titulo: 'Número', tipo: 'texto', ancho: 110 }, { campo: 'fecha', titulo: 'Fecha', tipo: 'fecha', ancho: 120 }, { campo: 'tercero_nombre', titulo: 'Tercero', tipo: 'texto' }, { campo: 'total', titulo: 'Total', tipo: 'dinero', ancho: 140 }], filas: lista(this.#datos['ultimos']), vacio: 'Aún no hay documentos.' } });
     root.append(html`<div class="dos"><section class="bloque"><h2>Últimos meses</h2>${grafica}</section><section class="bloque"><h2>Últimos documentos</h2>${ultimos}</section></div>`);
