@@ -10,5 +10,8 @@ import { descargarIconos } from 'https://raw.githubusercontent.com/Jeff-Aporta/i
 await descargarIconos({
   raiz: new URL('..', import.meta.url),
   roots: ['index.html', 'src', 'view'],
-  extra: ['mdi:information-outline', 'mdi:close', 'mdi:alert-outline', 'mdi:check-circle-outline', 'mdi:chevron-up', 'mdi:magnify'],  // ids que el barrido no ve: armados en ejecución o pintados por los componentes del kit
+  // ids que el barrido no ve: armados en ejecución o pintados por dentro por los componentes del kit que usa la app
+  // (empty-state, button, select, input, switch, dialog, data-grid, checkbox, callout, toast, stat). Sin ellos, Pages
+  // responde 404/503 y el ícono cae a la API de Iconify (auditoría del 2026-11-17).
+  extra: ['mdi:information-outline', 'mdi:information', 'mdi:close', 'mdi:close-circle', 'mdi:alert', 'mdi:alert-outline', 'mdi:alert-circle', 'mdi:alert-circle-outline', 'mdi:check', 'mdi:check-circle', 'mdi:check-circle-outline', 'mdi:chevron-up', 'mdi:chevron-down', 'mdi:magnify', 'mdi:loading', 'mdi:inbox-outline', 'mdi:eye-outline', 'mdi:eye-off-outline', 'mdi:minus'],
 });
