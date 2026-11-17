@@ -7,6 +7,9 @@
   @include m.host-bloque;
   /* El índice depende del ancho de la VISTA (puede estar en un panel dividido), no del de la ventana. */
   container: informes / inline-size;
+  /* con contención de ancho el host no toma el ancho de su contenido: se lo damos explícito (panel dividido) */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* En angosto el índice se vuelve un desplegable arriba del informe (no empuja el informe hacia abajo). */
@@ -15,19 +18,6 @@
   margin-bottom: t.esp(3);
 }
 
-@container informes (max-width: 46rem) {
-  .marco {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .indice {
-    display: none;
-  }
-
-  .elegir {
-    display: block;
-  }
-}
 
 .barra {
   @include v.barra;
@@ -127,5 +117,20 @@
 @media (max-width: 800px) {
   .marco {
     grid-template-columns: 1fr;
+  }
+}
+
+/* al final: debe ganar a .marco/.indice de arriba (misma especificidad) */
+@container informes (max-width: 46rem) {
+  .marco {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .indice {
+    display: none;
+  }
+
+  .elegir {
+    display: block;
   }
 }

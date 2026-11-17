@@ -7,11 +7,12 @@
   @include m.host-bloque;
 }
 
+/* El drawer del kit lee --iswc-drawer-size (ancho a la derecha, alto abajo). */
 iswc-drawer {
-  --size: min(44rem, 92vw);
+  --iswc-drawer-size: min(44rem, 92vw);
 
   &[placement="bottom"] {
-    --size: 92dvh;
+    --iswc-drawer-size: 92dvh;
   }
 }
 

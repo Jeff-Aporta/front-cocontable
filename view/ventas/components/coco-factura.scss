@@ -7,6 +7,9 @@
   @include m.host-bloque;
   /* el pie se parte según el ancho de la VISTA (menú abierto, paneles divididos), no de la ventana */
   container: factura / inline-size;
+  /* con contención de ancho el host no toma el ancho de su contenido: se lo damos explícito (panel dividido) */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .barra {
